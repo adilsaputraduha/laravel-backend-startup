@@ -6,11 +6,18 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
+    public function list()
+    {
+        return DB::table('users')
+            ->join('roles', 'users.id', '=', 'roles.id')
+            ->get();
+    }
     /**
      * The attributes that are mass assignable.
      *

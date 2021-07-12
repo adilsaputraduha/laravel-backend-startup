@@ -31,6 +31,7 @@
                                         <th>#</th>
                                         <th>Name</th>
                                         <th>Email</th>
+                                        <th>Role</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -40,6 +41,7 @@
                                             <td>{{ ++$number }}</td>
                                             <td>{{ $data->name }}</td>
                                             <td>{{ $data->email }}</td>
+                                            <td>{{ $data->roleName }}</td>
                                             <td class="text-center">
                                                 <a class="btn btn-green btn-sm mb-1" data-bs-toggle="modal"
                                                     data-bs-target="#editModal{{ $data->id }}">
@@ -83,8 +85,42 @@
                     <div class="modal-body">
                         <div class="mb-3">
                             <label class="form-label">Name</label>
-                            <input type="text" class="form-control" autocomplete="off" name="name"
-                                placeholder="Type new name ..." required />
+                            <input type="text" class="form-control @error('name') is-invalid @enderror"
+                                value="{{ old('name') }}" autocomplete="name" autofocus name="name"
+                                placeholder="Type new name ..." required id="name" />
+                            @error('name')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-control @error('email') is-invalid @enderror"
+                                autocomplete="email" value="{{ old('email') }}" name="email"
+                                placeholder="Type new email ..." required id="email" />
+                            @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Password</label>
+                            <input type="password" class="form-control @error('password') is-invalid @enderror"
+                                autocomplete="new-password" name="password" id="password"
+                                placeholder="Type new password ..." required />
+                            @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Confirm Password</label>
+                            <input type="password" class="form-control" autocomplete="new-password"
+                                name="password_confirmation" id="password-confirm" placeholder="Type confirm password ..."
+                                required />
                         </div>
                     </div>
                     <div class="modal-footer">

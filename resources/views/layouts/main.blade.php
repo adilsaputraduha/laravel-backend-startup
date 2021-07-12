@@ -143,9 +143,9 @@
                         <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <img
                                 class="rounded-circle header-profile-user" src="/assets/images/avatar.jpg"
-                                alt="Header Avatar"> <span
-                                class="d-none d-xl-inline-block ms-1 fw-medium font-size-15">Adil Saputra Duha</span> <i
-                                class="uil-angle-down d-none d-xl-inline-block font-size-15"></i> </button>
+                                alt="Header Avatar"> <span class="d-none d-xl-inline-block ms-1 fw-medium font-size-15">
+                                @guest @else{{ Auth::user()->name }} @endguest</span>
+                            <i class="uil-angle-down d-none d-xl-inline-block font-size-15"></i> </button>
                         <div class="dropdown-menu dropdown-menu-end">
                             <!-- item-->
                             <a class="dropdown-item" href="#">
@@ -166,7 +166,7 @@
                                     class="align-middle">Lock screen</span>
                             </a>
                             <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                            document.getElementById('logout-form').submit();">
+                        document.getElementById('logout-form').submit();">
                                 <i class="uil uil-sign-out-alt font-size-18 align-middle me-1 text-muted"></i>
                                 <span class="align-middle">Sign out</span>
                             </a>

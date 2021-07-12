@@ -7,9 +7,16 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->user = new User();
+    }
+
     public function index()
     {
-        $user = User::all();
-        return view('user', compact(['user']));
+        $data = [
+            'user' => $this->user->list()
+        ];
+        return view('user', $data);
     }
 }
