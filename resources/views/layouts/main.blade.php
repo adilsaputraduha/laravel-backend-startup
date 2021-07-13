@@ -143,7 +143,7 @@
                         <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <img
                                 class="rounded-circle header-profile-user" src="/assets/images/avatar.jpg"
-                                alt="Header Avatar"> <span class="d-none d-xl-inline-block ms-1 fw-medium font-size-15">
+                                alt="Header Avatar"> <span class="d-none d-xl-inline-block ms-1 fw-medium font-size-14">
                                 @guest @else{{ Auth::user()->name }} @endguest</span>
                             <i class="uil-angle-down d-none d-xl-inline-block font-size-15"></i> </button>
                         <div class="dropdown-menu dropdown-menu-end">
@@ -175,10 +175,6 @@
                             </form>
                         </div>
                     </div>
-                    <div class="dropdown d-inline-block">
-                        <button type="button" class="btn header-item noti-icon right-bar-toggle waves-effect"> <i
-                                class="uil-cog"></i> </button>
-                    </div>
                 </div>
             </div>
         </header>
@@ -202,7 +198,7 @@
                                 <span>Dashboard</span>
                             </a>
                         </li>
-                        <li class="menu-title">Master</li>
+                        <li class="menu-title">Masters</li>
                         <li>
                             <a href="javascript: void(0);" class="has-arrow waves-effect">
                                 <i class="iconify me-2 ms-2" data-icon="uil:users-alt" data-inline="false"></i>
@@ -224,19 +220,25 @@
                             </ul>
                         </li>
                         <li>
+                            <a href="/store" class="">
+                                <i class="iconify me-2 ms-2" data-icon="uil-store-alt" data-inline="false"></i>
+                                <span>Store</span>
+                            </a>
+                        </li>
+                        <li>
                             <a href="/product" class="">
                                 <i class="iconify me-2 ms-2" data-icon="uil-sitemap" data-inline="false"></i>
                                 <span>Product</span>
                             </a>
                         </li>
-                        <li class="menu-title">Transaction</li>
+                        <li class="menu-title">Transactions</li>
                         <li>
-                            <a href="/" class="">
-                                <i class="iconify me-2 ms-2" data-icon="uil-home-alt" data-inline="false"></i>
+                            <a href="/order" class="">
+                                <i class="iconify me-2 ms-2" data-icon="uil-clipboard-notes" data-inline="false"></i>
                                 <span>Order</span>
                             </a>
                         </li>
-                        <li class="menu-title">Report</li>
+                        <li class="menu-title">Reports</li>
                         <li>
                             <a href="javascript: void(0);" class="has-arrow waves-effect"> <i
                                     class="uil-user-circle"></i> <span>Authentication</span> </a>
@@ -259,6 +261,21 @@
                                 <li><a href="pages-pricing.html">Pricing</a></li>
                                 <li><a href="pages-404.html">Error 404</a></li>
                                 <li><a href="pages-500.html">Error 500</a></li>
+                            </ul>
+                        </li>
+                        <li class="menu-title">Settings</li>
+                        <li>
+                            <a href="javascript: void(0);" class="has-arrow waves-effect"> <i
+                                    class="uil-user-circle"></i> <span>Profile</span> </a>
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li><a href="auth-login.html">Login</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript: void(0);" class="has-arrow waves-effect"> <i class="uil-file-alt"></i>
+                                <span>Utility</span> </a>
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li><a href="pages-starter.html">Starter Page</a></li>
                             </ul>
                         </li>
                     </ul>

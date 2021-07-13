@@ -12,7 +12,11 @@ class Role extends Model
 
     public function list()
     {
-        return DB::table('roles')
-            ->get();
+        return DB::table('roles')->get();
+    }
+
+    public function create($data)
+    {
+        DB::table('roles')->insert($data);
     }
 }

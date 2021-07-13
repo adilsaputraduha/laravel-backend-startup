@@ -7,11 +7,19 @@ use Illuminate\Http\Request;
 
 class ProductCategoryController extends Controller
 {
+    public function __construct()
+    {
+        $this->productCategory = new ProductCategory();
+    }
+
     public function index()
     {
-        $productCategory = ProductCategory::all();
-        return view('product-category', compact(['productCategory']));
+        $data = [
+            'productCategory' => $this->productCategory->list()
+        ];
+        return view('product-category', $data);
     }
+
     public function save(Request $request)
     {
         ProductCategory::create($request->all());

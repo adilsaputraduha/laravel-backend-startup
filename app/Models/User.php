@@ -15,7 +15,7 @@ class User extends Authenticatable
     public function list()
     {
         return DB::table('users')
-            ->join('roles', 'users.id', '=', 'roles.id')
+            ->join('roles', 'users.id', '=', 'roles.roleId')
             ->get();
     }
     /**

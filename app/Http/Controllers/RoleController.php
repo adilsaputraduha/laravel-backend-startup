@@ -19,6 +19,13 @@ class RoleController extends Controller
         ];
         return view('role', $data);
     }
+
+    public function save(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required|max:255'
+        ]);
+    }
     // public function update(Request $request)
     // {
     //     $id = $request->input('id');

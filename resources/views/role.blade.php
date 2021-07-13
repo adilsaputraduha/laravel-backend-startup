@@ -30,8 +30,6 @@
                                     <tr>
                                         <th>#</th>
                                         <th>Name</th>
-                                        <th>Create</th>
-                                        <th>Update</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -40,11 +38,9 @@
                                         <tr>
                                             <td>{{ ++$number }}</td>
                                             <td>{{ $data->roleName }}</td>
-                                            <td>{{ date('d M Y', strtotime($data->created_at)) }}</td>
-                                            <td>{{ date('d M Y', strtotime($data->updated_at)) }}</td>
                                             <td class="text-center">
                                                 <a class="btn btn-green btn-sm mb-1" data-bs-toggle="modal"
-                                                    data-bs-target="#editModal{{ $data->id }}">
+                                                    data-bs-target="#editModal{{ $data->roleId }}">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                         fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
                                                         <path
@@ -52,7 +48,7 @@
                                                     </svg>
                                                 </a>
                                                 <a class="btn btn-green btn-sm mb-1" data-bs-toggle="modal"
-                                                    data-bs-target="#deleteModal{{ $data->id }}">
+                                                    data-bs-target="#deleteModal{{ $data->roleId }}">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                         fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
                                                         <path
@@ -73,7 +69,7 @@
         </div>
     </div>
     <!-- Modal -->
-    <form action="/role/save" method="POST">
+    <form action="/role/save" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="modal" tabindex="-1" id="addModal">
             <div class="modal-dialog">
@@ -85,8 +81,8 @@
                     <div class="modal-body">
                         <div class="mb-3">
                             <label class="form-label">Name</label>
-                            <input type="text" class="form-control" autocomplete="off" name="name"
-                                placeholder="Type new name ..." required />
+                            <input type="text" class="form-control @error('name') is-invalid @enderror" autocomplete="off"
+                                name="name" placeholder="Type new name ..." required />
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -98,10 +94,10 @@
         </div>
     </form>
     @foreach ($role as $data)
-        <form action="/role/update" method="POST">
+        <form action="/role/update" method="POST" enctype="multipart/form-data">
             @method('PUT')
             @csrf
-            <div class="modal" tabindex="-1" id="editModal{{ $data->id }}">
+            <div class="modal" tabindex="-1" id="editModal{{ $data->roleId }}">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -109,7 +105,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <input type="hidden" value="{{ $data->id }}" name="id" required />
+                            <input type="hidden" value="{{ $data->roleId }}" name="id" required />
                             <div class="mb-3">
                                 <label class="form-label">Name</label>
                                 <input type="text" class="form-control" value="{{ $data->roleName }}" autocomplete="off"
@@ -124,10 +120,10 @@
                 </div>
             </div>
         </form>
-        <form action="/user/delete" method="POST">
+        <form action="/user/delete" method="POST" enctype="multipart/form-data">
             @method('DELETE')
             @csrf
-            <div class="modal" tabindex="-1" id="deleteModal{{ $data->id }}">
+            <div class="modal" tabindex="-1" id="deleteModal{{ $data->roleId }}">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -135,7 +131,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <input type="hidden" name="id" required value="{{ $data->id }}" />
+                            <input type="hidden" name="id" required value="{{ $data->roleId }}" />
                             <h6>Are you sure you delete this data?</h6>
                         </div>
                         <div class="modal-footer">
