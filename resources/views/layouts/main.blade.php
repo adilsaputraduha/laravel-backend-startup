@@ -210,7 +210,7 @@
                             </a>
                             <ul class="sub-menu" aria-expanded="false">
                                 <li><a href="/user">User</a></li>
-                                <li><a href="ecommerce-product-detail.html">Role</a></li>
+                                <li><a href="/role">Role</a></li>
                             </ul>
                         </li>
                         <li>
@@ -222,6 +222,19 @@
                                 <li><a href="/product-category">Product Category</a></li>
                                 <li><a href="ecommerce-product-detail.html">Role</a></li>
                             </ul>
+                        </li>
+                        <li>
+                            <a href="/product" class="">
+                                <i class="iconify me-2 ms-2" data-icon="uil-sitemap" data-inline="false"></i>
+                                <span>Product</span>
+                            </a>
+                        </li>
+                        <li class="menu-title">Transaction</li>
+                        <li>
+                            <a href="/" class="">
+                                <i class="iconify me-2 ms-2" data-icon="uil-home-alt" data-inline="false"></i>
+                                <span>Order</span>
+                            </a>
                         </li>
                         <li class="menu-title">Report</li>
                         <li>
