@@ -22,6 +22,21 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
+                            @if (session('success-message'))
+                                <div class="alert alert-green alert-dismissible fade show" role="alert">
+                                    {{ session('success-message') }}
+                                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"
+                                        aria-label="Close">
+                                    </button>
+                                </div>
+                            @elseif (session('failed-message'))
+                                <div class="alert alert-red alert-dismissible fade show" role="alert">
+                                    {{ session('failed-message') }} : {{ $errors->content->first() }}
+                                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"
+                                        aria-label="Close">
+                                    </button>
+                                </div>
+                            @endif
                             <button type="button" class="btn btn-green mb-3" data-bs-toggle="modal"
                                 data-bs-target="#addModal">Add new</button>
                             <table id="datatable" class="table table-centered dt-responsive table-nowrap mb-0"
@@ -69,7 +84,7 @@
         </div>
     </div>
     <!-- Modal -->
-    <form action="/product-category/save" method="POST">
+    <form action="/product-category/save" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="modal" tabindex="-1" id="addModal">
             <div class="modal-dialog">
@@ -94,7 +109,7 @@
         </div>
     </form>
     @foreach ($productCategory as $data)
-        <form action="/product-category/update" method="POST">
+        <form action="/product-category/update" method="POST" enctype="multipart/form-data">
             @method('PUT')
             @csrf
             <div class="modal" tabindex="-1" id="editModal{{ $data->productCategoryId }}">
@@ -120,7 +135,7 @@
                 </div>
             </div>
         </form>
-        <form action="/product-category/delete" method="POST">
+        <form action="/product-category/delete" method="POST" enctype="multipart/form-data">
             @method('DELETE')
             @csrf
             <div class="modal" tabindex="-1" id="deleteModal{{ $data->productCategoryId }}">

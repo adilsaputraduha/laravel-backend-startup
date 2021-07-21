@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ProductCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ProductCategoryController extends Controller
 {
@@ -22,21 +23,53 @@ class ProductCategoryController extends Controller
 
     public function save(Request $request)
     {
-        ProductCategory::create($request->all());
-        return redirect('product-category');
+        // Membuat validasi
+        $validated = Validator::make($request->all(), [
+            'name' => 'required|max:255'
+        ]);
+
+        if ($validated->fails()) {
+            // Jika validasi gagal
+            return redirect('/product-category')->with('failed-message', 'Data failed to save')->withErrors($validated, 'content');
+        } else {
+            // Jika validasi berhasil
+            date_default_timezone_set('Asia/Jakarta');
+            $data = [
+                'productCategoryName' => Request()->name,
+                'productCategoryCreatedAt' => date('Y-m-d H:i:s')
+            ];
+            $this->productCategory->saveData($data);
+            return redirect('/product-category')->with('success-message', 'Data saved successfully');
+        }
     }
+
     public function update(Request $request)
     {
-        $id = $request->input('id');
-        $productCategory = ProductCategory::find($id);
-        $productCategory->update($request->all());
-        return redirect('product-category');
+        // Membuat validasi
+        $validated = Validator::make($request->all(), [
+            'id' => 'required',
+            'name' => 'required|max:255'
+        ]);
+
+        if ($validated->fails()) {
+            return redirect('/product-category')->with('failed-message', 'Data failed to update')->withErrors($validated, 'content');
+        } else {
+            // Jika validasi berhasil
+            date_default_timezone_set('Asia/Jakarta');
+            $id = Request()->id;
+            $data = [
+                'productCategoryName' => Request()->name,
+                'productCategoryUpdatedAt' => date('Y-m-d H:i:s')
+            ];
+            $this->productCategory->updateData($id, $data);
+            return redirect('/product-category')->with('success-message', 'Data updated successfully');
+        }
     }
-    public function delete(Request $request)
+
+    public function delete()
     {
-        $id = $request->input('id');
-        $productCategory = ProductCategory::find($id);
-        $productCategory->delete();
-        return redirect('product-category');
+        $id = Request()->id;
+        $this->productCategory->deleteData($id);
+        return redirect('/product-category')->with('success-message', 'Data deleted successfully');
     }
 }

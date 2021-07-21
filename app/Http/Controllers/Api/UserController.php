@@ -17,7 +17,7 @@ class UserController extends Controller
             // Cek password
             if (password_verify($request->password, $user->password)) {
                 return response()->json([
-                    'success' => true,
+                    'success' => 1,
                     'message' => 'Data berhasil ditemukan',
                     'user' => $user
                 ]);
@@ -61,7 +61,7 @@ class UserController extends Controller
     public function error($pesan)
     {
         return response()->json([
-            'success' => false,
+            'success' => 0,
             'message' => $pesan
         ]);
     }

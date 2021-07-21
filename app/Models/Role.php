@@ -15,8 +15,22 @@ class Role extends Model
         return DB::table('roles')->get();
     }
 
-    public function create($data)
+    public function saveData($data)
     {
         DB::table('roles')->insert($data);
+    }
+
+    public function updateData($id, $data)
+    {
+        DB::table('roles')
+            ->where('roleId', '=', $id)
+            ->update($data);
+    }
+
+    public function deleteData($id)
+    {
+        DB::table('roles')
+            ->where('roleId', '=', $id)
+            ->delete();
     }
 }

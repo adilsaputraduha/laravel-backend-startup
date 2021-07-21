@@ -45,14 +45,14 @@
                                             <td>{{ $data->productCategoryName }}</td>
                                             <td>
                                                 @if ($data->productStatus == 0)
-                                                    <span class="badge bg-success">Not Publish</span>
+                                                    <span class="badge bg-danger">Not Publish</span>
                                                 @elseif ($data->productStatus == 1)
                                                     <span class="badge bg-green">Publish</span>
                                                 @elseif ($data->productStatus == 2)
-                                                    <span class="badge bg-success">Waiting</span>
+                                                    <span class="badge bg-green">Waiting</span>
                                                 @endif
                                             </td>
-                                            <td>{{ $data->productPrice }}</td>
+                                            <td>@currency($data->productPrice)</td>
                                             <td class="text-center">
                                                 <a class="btn btn-green btn-sm mb-1" data-bs-toggle="modal"
                                                     data-bs-target="#editModal{{ $data->productId }}">
@@ -93,20 +93,88 @@
         </div>
     </div>
     <!-- Modal -->
-    <form action="/product-category/save" method="POST">
+    <form action="/product/save" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="modal" tabindex="-1" id="addModal">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Add product category</h5>
+                        <h5 class="modal-title">Add product</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <div class="mb-3">
-                            <label class="form-label">Name</label>
-                            <input type="text" class="form-control" autocomplete="off" name="name"
-                                placeholder="Type new name ..." required />
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Name</label>
+                                    <input type="text" class="form-control" autocomplete="off" name="name"
+                                        placeholder="Type new name ..." required />
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Price</label>
+                                    <input type="text" class="form-control" autocomplete="off"
+                                        onkeypress="return onlyNumber(event)" name="price" placeholder="Type new price ..."
+                                        required />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Product Category</label>
+                                    <select class="form-select" name="productcategory" required>
+                                        @foreach ($productCategory as $data)
+                                            <option value="{{ $data->productCategoryId }}">
+                                                {{ $data->productCategoryName }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Store</label>
+                                    <select class="form-select" name="store" required>
+                                        @foreach ($store as $data)
+                                            <option value="{{ $data->storeId }}">{{ $data->storeName }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="mb-3">
+                                    <label class="form-label">Description</label>
+                                    <textarea class="form-control" placeholder="Type new description ..." name="description"
+                                        style="height: 100px" required></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label class="form-label">Status</label>
+                                <div class="mb-3">
+                                    <div class="form-check form-check-inline mt-2">
+                                        <input class="form-check-input" type="radio" name="status" id="status1" value="0"
+                                            required>
+                                        <label class="form-check-label" for="status1">Non Publish</label>
+                                    </div>
+                                    <div class="form-check form-check-inline mt-2">
+                                        <input class="form-check-input" type="radio" name="status" id="status2" value="1"
+                                            required>
+                                        <label class="form-check-label" for="status2">Publish</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <label class="form-label">Image</label>
+                                <div class="input-group mb-3">
+                                    <input type="file" class="form-control" required name="image">
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -144,14 +212,14 @@
                 </div>
             </div>
         </form>
-        <form action="/product-category/delete" method="POST">
+        <form action="/product/delete" method="POST">
             @method('DELETE')
             @csrf
             <div class="modal" tabindex="-1" id="deleteModal{{ $data->productId }}">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">Delete product category</h5>
+                            <h5 class="modal-title">Delete product</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
@@ -166,24 +234,6 @@
                 </div>
             </div>
         </form>
-        <div class="modal" tabindex="-1" id="detailModal{{ $data->productId }}">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Delete product category</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <input type="hidden" name="id" required value="{{ $data->productId }}" />
-                        <h6>Are you sure you delete this data?</h6>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-                        <button type="submit" class="btn btn-green">Yes</button>
-                    </div>
-                </div>
-            </div>
-        </div>
     @endforeach
 @endsection
 
@@ -206,4 +256,13 @@
     <script src="assets/js/pages/datatables.init.js"></script>
     <!-- App js -->
     <script src="/assets/js/app.js"></script>
+
+    <script>
+        function onlyNumber(event) {
+            var angka = (event.which) ? event.which : event.keyCode
+            if (angka != 46 && angka > 31 && (angka < 48 || angka > 57))
+                return false;
+            return true;
+        }
+    </script>
 @endsection

@@ -17,4 +17,16 @@ class Product extends Model
             ->join('stores', 'storeId', '=', 'productStore')
             ->get();
     }
+
+    public function saveData($data)
+    {
+        DB::table('products')->insert($data);
+    }
+
+    public function deleteData($id)
+    {
+        DB::table('products')
+            ->where('productId', '=', $id)
+            ->delete();
+    }
 }

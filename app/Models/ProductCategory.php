@@ -14,4 +14,23 @@ class ProductCategory extends Model
     {
         return DB::table('product_categories')->get();
     }
+
+    public function saveData($data)
+    {
+        DB::table('product_categories')->insert($data);
+    }
+
+    public function updateData($id, $data)
+    {
+        DB::table('product_categories')
+            ->where('productCategoryId', '=', $id)
+            ->update($data);
+    }
+
+    public function deleteData($id)
+    {
+        DB::table('product_categories')
+            ->where('productCategoryId', '=', $id)
+            ->delete();
+    }
 }

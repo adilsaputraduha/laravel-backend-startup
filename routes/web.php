@@ -32,10 +32,14 @@ Route::delete('/product-category/delete', [ProductCategoryController::class, 'de
 // Role
 Route::get('/role', [RoleController::class, 'index']);
 Route::post('/role/save', [RoleController::class, 'save']);
+Route::put('/role/update', [RoleController::class, 'update']);
+Route::delete('/role/delete', [RoleController::class, 'delete']);
 // Store
 Route::get('/store', [StoreController::class, 'index']);
 // Product
 Route::get('/product', [ProductController::class, 'index']);
+Route::post('/product/save', [ProductController::class, 'save']);
+Route::delete('/product/delete', [ProductController::class, 'delete']);
 
 Auth::routes();
 

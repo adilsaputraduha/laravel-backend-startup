@@ -22,6 +22,21 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
+                            @if (session('success-message'))
+                                <div class="alert alert-green alert-dismissible fade show" role="alert">
+                                    {{ session('success-message') }}
+                                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"
+                                        aria-label="Close">
+                                    </button>
+                                </div>
+                            @elseif (session('failed-message'))
+                                <div class="alert alert-red alert-dismissible fade show" role="alert">
+                                    {{ session('failed-message') }} : {{ $errors->content->first() }}
+                                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"
+                                        aria-label="Close">
+                                    </button>
+                                </div>
+                            @endif
                             <button type="button" class="btn btn-green mb-3" data-bs-toggle="modal"
                                 data-bs-target="#addModal">Add new</button>
                             <table id="datatable" class="table table-centered dt-responsive table-nowrap mb-0"
@@ -81,8 +96,8 @@
                     <div class="modal-body">
                         <div class="mb-3">
                             <label class="form-label">Name</label>
-                            <input type="text" class="form-control @error('name') is-invalid @enderror" autocomplete="off"
-                                name="name" placeholder="Type new name ..." required />
+                            <input type="text" class="form-control" autocomplete="off" name="name"
+                                placeholder="Type new name ..." required />
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -120,7 +135,7 @@
                 </div>
             </div>
         </form>
-        <form action="/user/delete" method="POST" enctype="multipart/form-data">
+        <form action="/role/delete" method="POST" enctype="multipart/form-data">
             @method('DELETE')
             @csrf
             <div class="modal" tabindex="-1" id="deleteModal{{ $data->roleId }}">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Role;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
 class RoleController extends Controller
@@ -22,22 +23,53 @@ class RoleController extends Controller
 
     public function save(Request $request)
     {
-        $validated = $request->validate([
+        // Membuat validasi
+        $validated = Validator::make($request->all(), [
             'name' => 'required|max:255'
         ]);
+
+        if ($validated->fails()) {
+            // Jika validasi gagal
+            return redirect('/role')->with('failed-message', 'Data failed to save')->withErrors($validated, 'content');
+        } else {
+            // Jika validasi berhasil
+            date_default_timezone_set('Asia/Jakarta');
+            $data = [
+                'roleName' => Request()->name,
+                'roleCreatedAt' => date('Y-m-d H:i:s')
+            ];
+            $this->role->saveData($data);
+            return redirect('/role')->with('success-message', 'Data saved successfully');
+        }
     }
-    // public function update(Request $request)
-    // {
-    //     $id = $request->input('id');
-    //     $productCategory = ProductCategory::find($id);
-    //     $productCategory->update($request->all());
-    //     return redirect('product-category');
-    // }
-    // public function delete(Request $request)
-    // {
-    //     $id = $request->input('id');
-    //     $productCategory = ProductCategory::find($id);
-    //     $productCategory->delete();
-    //     return redirect('product-category');
-    // }
+
+    public function update(Request $request)
+    {
+        // Membuat validasi
+        $validated = Validator::make($request->all(), [
+            'id' => 'required',
+            'name' => 'required|max:255'
+        ]);
+
+        if ($validated->fails()) {
+            return redirect('/role')->with('failed-message', 'Data failed to update')->withErrors($validated, 'content');
+        } else {
+            // Jika validasi berhasil
+            date_default_timezone_set('Asia/Jakarta');
+            $id = Request()->id;
+            $data = [
+                'roleName' => Request()->name,
+                'roleUpdatedAt' => date('Y-m-d H:i:s')
+            ];
+            $this->role->updateData($id, $data);
+            return redirect('/role')->with('success-message', 'Data updated successfully');
+        }
+    }
+
+    public function delete()
+    {
+        $id = Request()->id;
+        $this->role->deleteData($id);
+        return redirect('/role')->with('success-message', 'Data deleted successfully');
+    }
 }

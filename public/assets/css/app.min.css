@@ -599,162 +599,6 @@ body:not(.vertical-collpsed) .app-search {
 .vertical-collpsed .vertical-menu #sidebar-menu > ul ul li.active a {
     color: #f8f9fa;
 }
-body[data-sidebar-size="small"] .navbar-brand-box {
-    width: 160px;
-}
-@media (max-width: 991.98px) {
-    body[data-sidebar-size="small"] .navbar-brand-box {
-        width: auto;
-    }
-}
-body[data-sidebar-size="small"] .vertical-menu {
-    width: 160px;
-    text-align: center;
-}
-body[data-sidebar-size="small"] .vertical-menu .badge,
-body[data-sidebar-size="small"] .vertical-menu .has-arrow:after {
-    display: none !important;
-}
-body[data-sidebar-size="small"] .vertical-menu .vertical-menu-btn {
-    display: none;
-}
-body[data-sidebar-size="small"] .main-content {
-    margin-left: 160px;
-}
-body[data-sidebar-size="small"] #page-topbar,
-body[data-sidebar-size="small"] .footer {
-    left: 160px;
-}
-@media (max-width: 991.98px) {
-    body[data-sidebar-size="small"] #page-topbar,
-    body[data-sidebar-size="small"] .footer {
-        left: 0;
-    }
-}
-body[data-sidebar-size="small"] #sidebar-menu ul li.menu-title {
-    background-color: #fafafa;
-}
-body[data-sidebar-size="small"] #sidebar-menu ul li a i {
-    display: block;
-}
-body[data-sidebar-size="small"] #sidebar-menu ul li ul.sub-menu li a {
-    padding-left: 1.5rem;
-}
-body[data-sidebar-size="small"]
-    #sidebar-menu
-    ul
-    li
-    ul.sub-menu
-    li
-    ul.sub-menu
-    li
-    a {
-    padding-left: 1.5rem;
-}
-body[data-sidebar-size="small"][data-sidebar="dark"]
-    #sidebar-menu
-    ul
-    li.menu-title {
-    background-color: #1f2b49;
-}
-body[data-sidebar-size="small"]:not(.vertical-collpsed)
-    .navbar-header
-    .vertical-menu-btn {
-    display: block;
-}
-body[data-sidebar-size="small"].vertical-collpsed .main-content {
-    margin-left: 70px;
-}
-body[data-sidebar-size="small"].vertical-collpsed .vertical-menu #sidebar-menu {
-    text-align: left;
-}
-body[data-sidebar-size="small"].vertical-collpsed
-    .vertical-menu
-    #sidebar-menu
-    > ul
-    > li
-    > a
-    i {
-    display: inline-block;
-}
-body[data-sidebar-size="small"].vertical-collpsed #page-topbar,
-body[data-sidebar-size="small"].vertical-collpsed .footer {
-    left: 70px;
-}
-body[data-sidebar="colored"] .vertical-menu {
-    background-color: #00aa13;
-}
-body[data-sidebar="colored"] .vertical-menu .vertical-menu-btn {
-    color: rgba(255, 255, 255, 0.8);
-}
-body[data-sidebar="colored"] .navbar-brand-box {
-    background-color: #00aa13;
-}
-body[data-sidebar="colored"] .navbar-brand-box .logo-dark {
-    display: none;
-}
-body[data-sidebar="colored"] .navbar-brand-box .logo-light {
-    display: block;
-}
-body[data-sidebar="colored"] .mm-active {
-    color: #fff !important;
-}
-body[data-sidebar="colored"] .mm-active > a {
-    background-color: rgba(255, 255, 255, 0.1);
-    color: #fff !important;
-}
-body[data-sidebar="colored"] .mm-active > a > i {
-    color: #fff !important;
-}
-body[data-sidebar="colored"] .mm-active .active,
-body[data-sidebar="colored"] .mm-active > i {
-    color: #fff !important;
-}
-body[data-sidebar="colored"] #sidebar-menu ul li.menu-title {
-    color: rgba(255, 255, 255, 0.7);
-}
-body[data-sidebar="colored"] #sidebar-menu ul li a {
-    color: rgba(255, 255, 255, 0.7);
-}
-body[data-sidebar="colored"] #sidebar-menu ul li a i {
-    color: rgba(255, 255, 255, 0.7);
-}
-body[data-sidebar="colored"] #sidebar-menu ul li a.waves-effect .waves-ripple {
-    background: rgba(255, 255, 255, 0.1);
-}
-body[data-sidebar="colored"] #sidebar-menu ul li ul.sub-menu li a {
-    color: rgba(255, 255, 255, 0.6);
-}
-body[data-sidebar="colored"] #sidebar-menu ul li .badge.badge-primary {
-    background-color: #fff;
-    color: #00aa13;
-}
-body[data-sidebar="colored"].vertical-collpsed
-    .vertical-menu
-    #sidebar-menu
-    > ul
-    > li:hover
-    > a {
-    background-color: #647be9;
-    color: #fff;
-}
-body[data-sidebar="colored"].vertical-collpsed
-    .vertical-menu
-    #sidebar-menu
-    > ul
-    > li:hover
-    > a
-    i {
-    color: #fff;
-}
-body[data-sidebar="colored"].vertical-collpsed
-    .vertical-menu
-    #sidebar-menu
-    ul
-    li.mm-active
-    .active {
-    color: #00aa13 !important;
-}
 .topnav {
     background: #fff;
     padding: 0 calc(1.25rem / 2);
@@ -3928,4 +3772,14 @@ table.dataTable.dtr-inline.collapsed > tbody > tr > td.dtr-control:before {
 
 .text-green {
     color: #007a0e;
+}
+
+.alert-green {
+    color: #fff;
+    background-color: #00aa13;
+}
+
+.alert-red {
+    color: #fff;
+    background-color: #a80000;
 }

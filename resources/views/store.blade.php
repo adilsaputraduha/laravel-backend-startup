@@ -27,7 +27,7 @@
                                 style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                 <thead>
                                     <tr>
-                                        <th>#</th>
+                                        <th style="width: 5%">#</th>
                                         <th>Name</th>
                                         <th>Email</th>
                                         <th>Area</th>
@@ -85,17 +85,77 @@
     <form action="/product-category/save" method="POST">
         @csrf
         <div class="modal" tabindex="-1" id="addModal">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Add product category</h5>
+                        <h5 class="modal-title">Add store</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <div class="mb-3">
-                            <label class="form-label">Name</label>
-                            <input type="text" class="form-control" autocomplete="off" name="name"
-                                placeholder="Type new name ..." required />
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Name</label>
+                                    <input type="text" class="form-control" autocomplete="off" name="name"
+                                        placeholder="Type new name ..." required />
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Email</label>
+                                    <input type="email" class="form-control" autocomplete="off" name="email"
+                                        placeholder="Type new email ..." required />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Phone Number</label>
+                                    <input type="text" class="form-control" autocomplete="off" name="phonenumber"
+                                        placeholder="Type new phone number ..." required />
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Zip Code</label>
+                                    <input type="text" class="form-control" autocomplete="off" name="zipcode"
+                                        placeholder="Type new zip code ..." required />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="mb-3">
+                                    <label class="form-label">Street</label>
+                                    <textarea class="form-control" placeholder="Type new street ..." name="street"
+                                        style="height: 100px"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="mb-3">
+                                    <label class="form-label">District</label>
+                                    <input type="text" class="form-control" autocomplete="off" name="district"
+                                        placeholder="Type new district ..." required />
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="mb-3">
+                                    <label class="form-label">City</label>
+                                    <input type="text" class="form-control" autocomplete="off" name="city"
+                                        placeholder="Type new city ..." required />
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="mb-3">
+                                    <label class="form-label">Province</label>
+                                    <input type="text" class="form-control" autocomplete="off" name="province"
+                                        placeholder="Type new province ..." required />
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -111,18 +171,81 @@
             @method('PUT')
             @csrf
             <div class="modal" tabindex="-1" id="editModal{{ $data->storeId }}">
-                <div class="modal-dialog">
+                <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">Update product category</h5>
+                            <h5 class="modal-title">Update store</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <input type="hidden" value="{{ $data->storeId }}" name="id" required />
-                            <div class="mb-3">
-                                <label class="form-label">Name</label>
-                                <input type="text" class="form-control" value="{{ $data->storeName }}" autocomplete="off"
-                                    name="name" placeholder="Type new name ..." required />
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Name</label>
+                                        <input type="text" class="form-control" autocomplete="off" name="name"
+                                            placeholder="Type new name ..." value="{{ $data->storeName }}" required />
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Email</label>
+                                        <input type="email" class="form-control" autocomplete="off" name="email"
+                                            placeholder="Type new email ..." value="{{ $data->storeEmail }}" required />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Phone Number</label>
+                                        <input type="text" class="form-control" autocomplete="off" name="phonenumber"
+                                            placeholder="Type new phone number ..." value="{{ $data->storePhoneNumber }}"
+                                            required />
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Zip Code</label>
+                                        <input type="text" class="form-control" autocomplete="off" name="zipcode"
+                                            placeholder="Type new zip code ..." value="{{ $data->storeZipCode }}"
+                                            required />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="mb-3">
+                                        <label class="form-label">Street</label>
+                                        <textarea class="form-control" placeholder="Type new street ..." name="street"
+                                            style="height: 100px">{{ $data->storeStreet }}</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="mb-3">
+                                        <label class="form-label">District</label>
+                                        <input type="text" class="form-control" autocomplete="off" name="district"
+                                            placeholder="Type new district ..." value="{{ $data->storeDistrict }}"
+                                            required />
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="mb-3">
+                                        <label class="form-label">City</label>
+                                        <input type="text" class="form-control" autocomplete="off" name="city"
+                                            placeholder="Type new city ..." value="{{ $data->storeCity }}" required />
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="mb-3">
+                                        <label class="form-label">Province</label>
+                                        <input type="text" class="form-control" autocomplete="off" name="province"
+                                            placeholder="Type new province ..." value="{{ $data->storeProvince }}"
+                                            required />
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -140,7 +263,7 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">Delete product category</h5>
+                            <h5 class="modal-title">Delete store</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
