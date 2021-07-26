@@ -17,9 +17,9 @@ class ProductCategoryController extends Controller
     {
         $data =  $this->productCategory->list();
         return response()->json([
-            'success' => true,
+            'success' => 1,
             'message' => 'Data berhasil ditemukan',
-            'user' => $data
+            'productcategory' => $data
         ]);
     }
 }

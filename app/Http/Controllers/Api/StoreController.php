@@ -17,9 +17,9 @@ class StoreController extends Controller
     {
         $data =  $this->store->list();
         return response()->json([
-            'success' => true,
+            'success' => 1,
             'message' => 'Data berhasil ditemukan',
-            'user' => $data
+            'store' => $data
         ]);
     }
 }

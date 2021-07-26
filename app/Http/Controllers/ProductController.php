@@ -69,7 +69,7 @@ class ProductController extends Controller
     public function delete()
     {
         $id = Request()->id;
-        $this->role->deleteData($id);
+        $this->product->deleteData($id);
         return redirect('/product')->with('success-message', 'Data deleted successfully');
     }
 }

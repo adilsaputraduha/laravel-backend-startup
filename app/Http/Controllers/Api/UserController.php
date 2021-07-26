@@ -49,7 +49,7 @@ class UserController extends Controller
         // Jika data berhasil disimpan
         if ($user) {
             return response()->json([
-                'success' => true,
+                'success' => 1,
                 'message' => 'Registrasi berhasil',
                 'user' => $user
             ]);
