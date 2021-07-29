@@ -72,7 +72,7 @@
                                                             d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
                                                     </svg>
                                                 </a>
-                                                <a class="btn btn-green btn-sm mb-1" data-bs-toggle="modal"
+                                                <a class="btn btn-warning btn-sm mb-1" data-bs-toggle="modal"
                                                     data-bs-target="#detailModal{{ $data->productId }}">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                         fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
@@ -239,23 +239,23 @@
 
 @section('script')
     <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
-    <script src="/assets/libs/jquery/jquery.min.js"></script>
-    <script src="/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="/assets/libs/metismenu/metisMenu.min.js"></script>
-    <script src="/assets/libs/simplebar/simplebar.min.js"></script>
-    <script src="/assets/libs/node-waves/waves.min.js"></script>
-    <script src="/assets/libs/waypoints/lib/jquery.waypoints.min.js"></script>
-    <script src="/assets/libs/jquery.counterup/jquery.counterup.min.js"></script>
+    <script src="{{ asset('assets') }}/libs/jquery/jquery.min.js"></script>
+    <script src="{{ asset('assets') }}/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('assets') }}/libs/metismenu/metisMenu.min.js"></script>
+    <script src="{{ asset('assets') }}/libs/simplebar/simplebar.min.js"></script>
+    <script src="{{ asset('assets') }}/libs/node-waves/waves.min.js"></script>
+    <script src="{{ asset('assets') }}/libs/waypoints/lib/jquery.waypoints.min.js"></script>
+    <script src="{{ asset('assets') }}/libs/jquery.counterup/jquery.counterup.min.js"></script>
     <!-- Datatable -->
-    <script src="/assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
-    <script src="/assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="{{ asset('assets') }}/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="{{ asset('assets') }}/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
     <!-- Responsive examples -->
-    <script src="/assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="/assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+    <script src="{{ asset('assets') }}/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="{{ asset('assets') }}/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
     <!-- Datatable init js -->
-    <script src="assets/js/pages/datatables.init.js"></script>
+    <script src="{{ asset('assets') }}/js/pages/datatables.init.js"></script>
     <!-- App js -->
-    <script src="/assets/js/app.js"></script>
+    <script src="{{ asset('assets') }}/js/app.js"></script>
 
     <script>
         function onlyNumber(event) {
