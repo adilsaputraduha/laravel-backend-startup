@@ -380,7 +380,7 @@ body:not(.vertical-collpsed) .app-search {
     display: inline-block;
     min-width: 1.5rem;
     padding-bottom: 0.125em;
-    font-size: 1.05rem;
+    font-size: 0.9rem;
     line-height: 1.40625rem;
     vertical-align: middle;
     color: #7b8190;
@@ -525,7 +525,7 @@ body:not(.vertical-collpsed) .app-search {
     color: #383c40;
 }
 .vertical-collpsed .vertical-menu #sidebar-menu > ul > li > a i {
-    font-size: 1.3rem;
+    font-size: 1rem;
     text-align: center;
     min-width: 50px;
     padding-bottom: 0;

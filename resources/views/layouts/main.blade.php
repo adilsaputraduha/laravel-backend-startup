@@ -19,6 +19,9 @@
     <!-- Responsive datatable examples -->
     <link href="{{ asset('assets') }}/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css"
         rel="stylesheet" type="text/css" />
+    <!-- Font Awesome-->
+    <link href="{{ asset('assets') }}/icon/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
     <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
 </head>
 
@@ -194,48 +197,48 @@
                     <ul class="metismenu list-unstyled" id="side-menu">
                         <li class="menu-title">Menu</li>
                         <li>
-                            <a href="/" class="">
-                                <i class="iconify me-2 ms-2" data-icon="uil-home-alt" data-inline="false"></i>
+                            <a href="{{ route('home') }}" class="">
+                                <i class="fa fa-home" data-inline="false"></i>
                                 <span>Dashboard</span>
                             </a>
                         </li>
                         <li class="menu-title">Masters</li>
                         <li>
                             <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                <i class="iconify me-2 ms-2" data-icon="uil:users-alt" data-inline="false"></i>
+                                <i class="fa fa-users me-2" data-inline="false"></i>
                                 <span>Users</span>
                             </a>
                             <ul class="sub-menu" aria-expanded="false">
-                                <li><a href="/user">User</a></li>
-                                <li><a href="/role">Role</a></li>
+                                <li><a href="{{ route('user') }}">User</a></li>
+                                <li><a href="{{ route('role') }}">Role</a></li>
                             </ul>
                         </li>
                         <li>
                             <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                <i class="iconify me-2 ms-2" data-icon="uil:layer-group" data-inline="false"></i>
+                                <i class="fa fa-server me-2" data-inline="false"></i>
                                 <span>Categories</span>
                             </a>
                             <ul class="sub-menu" aria-expanded="false">
-                                <li><a href="/product-category">Product Category</a></li>
+                                <li><a href="{{ route('productcategory') }}">Product Category</a></li>
                                 <li><a href="ecommerce-product-detail.html">Role</a></li>
                             </ul>
                         </li>
                         <li>
-                            <a href="/store" class="">
-                                <i class="iconify me-2 ms-2" data-icon="uil-store-alt" data-inline="false"></i>
+                            <a href="{{ route('store') }}" class="">
+                                <i class="fas fa-store me-2" data-inline=" false"></i>
                                 <span>Store</span>
                             </a>
                         </li>
                         <li>
-                            <a href="/product" class="">
-                                <i class="iconify me-2 ms-2" data-icon="uil-sitemap" data-inline="false"></i>
+                            <a href="{{ route('product') }}" class="">
+                                <i class="fa fa-sitemap me-2" data-inline="false"></i>
                                 <span>Product</span>
                             </a>
                         </li>
                         <li class="menu-title">Transactions</li>
                         <li>
                             <a href="/order" class="">
-                                <i class="iconify me-2 ms-2" data-icon="uil-clipboard-notes" data-inline="false"></i>
+                                <i class="fa fa-list me-2" data-inline="false"></i>
                                 <span>Order</span>
                             </a>
                         </li>

@@ -20,24 +20,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index'])->name('home');
 // User
-Route::get('/user', [UserController::class, 'index']);
+Route::get('/user', [UserController::class, 'index'])->name('user');
 Route::post('/user/save', [UserController::class, 'save']);
 // Product Category
-Route::get('/product-category', [ProductCategoryController::class, 'index']);
+Route::get('/product-category', [ProductCategoryController::class, 'index'])->name('productcategory');
 Route::post('/product-category/save', [ProductCategoryController::class, 'save']);
 Route::put('/product-category/update', [ProductCategoryController::class, 'update']);
 Route::delete('/product-category/delete', [ProductCategoryController::class, 'delete']);
 // Role
-Route::get('/role', [RoleController::class, 'index']);
+Route::get('/role', [RoleController::class, 'index'])->name('role');
 Route::post('/role/save', [RoleController::class, 'save']);
 Route::put('/role/update', [RoleController::class, 'update']);
 Route::delete('/role/delete', [RoleController::class, 'delete']);
 // Store
-Route::get('/store', [StoreController::class, 'index']);
+Route::get('/store', [StoreController::class, 'index'])->name('store');
 // Product
-Route::get('/product', [ProductController::class, 'index']);
+Route::get('/product', [ProductController::class, 'index'])->name('product');
 Route::post('/product/save', [ProductController::class, 'save']);
 Route::delete('/product/delete', [ProductController::class, 'delete']);
 
