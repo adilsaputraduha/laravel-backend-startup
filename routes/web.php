@@ -40,6 +40,7 @@ Route::get('/store', [StoreController::class, 'index'])->name('store');
 Route::get('/product', [ProductController::class, 'index'])->name('product');
 Route::post('/product/save', [ProductController::class, 'save']);
 Route::delete('/product/delete', [ProductController::class, 'delete']);
+// Transaksi
 
 Auth::routes();
 

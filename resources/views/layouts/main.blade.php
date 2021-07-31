@@ -197,8 +197,8 @@
                     <ul class="metismenu list-unstyled" id="side-menu">
                         <li class="menu-title">Menu</li>
                         <li>
-                            <a href="{{ route('home') }}" class="">
-                                <i class="fa fa-home" data-inline="false"></i>
+                            <a href="{{ route('home') }}" class="{{ request()->is('/') ? 'mm-active' : '' }} ">
+                                <i class="fas fa-home me-2" data-inline="false"></i>
                                 <span>Dashboard</span>
                             </a>
                         </li>
