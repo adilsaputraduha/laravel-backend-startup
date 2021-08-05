@@ -3774,6 +3774,10 @@ table.dataTable.dtr-inline.collapsed > tbody > tr > td.dtr-control:before {
     color: #007a0e;
 }
 
+.text-green:hover {
+    color: #00630c;
+}
+
 .alert-green {
     color: #fff;
     background-color: #00aa13;

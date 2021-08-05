@@ -4,22 +4,26 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
 
 class Transaction extends Model
 {
     use HasFactory;
 
-    public function list()
+    protected $fillable = [
+        'transactionUserId', 'transactionPaymentCode',
+        'transactionCode', 'transactionTotalItem', 'transactionTotalPrice', 'transactionUniqueCode',
+        'transactionStatus', 'transactionReceipt', 'transactionCourier', 'transactionName',
+        'transactionPhone', 'transactionLocationDetail', 'transactionMethod',
+        'transactionDescription', 'transactionExpiredAt'
+    ];
+
+    public function details()
     {
-        return DB::table('transactions')
-            ->join('detail_transactions', 'transactionId', '=', 'detailTransactionId')
-            ->join('users', 'transactionUserId', '=', 'id')
-            ->get();
+        return $this->hasMany(TransaksiDetail::class, "transactionId", "detailTransactionId");
     }
 
-    public function saveData($data)
+    public function user()
     {
-        DB::table('transactions')->insert($data);
+        return $this->belongsTo(User::class, "userId", "transactionUserId");
     }
 }
