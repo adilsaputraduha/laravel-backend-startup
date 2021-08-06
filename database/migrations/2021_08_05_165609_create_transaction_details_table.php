@@ -13,7 +13,7 @@ class CreateTransactionDetailsTable extends Migration
      */
     public function up()
     {
-        Schema::create('detail_transactions', function (Blueprint $table) {
+        Schema::create('transaction_details', function (Blueprint $table) {
             $table->bigIncrements('detailId');
             $table->bigInteger('detailTransactionId')->unsigned();
             $table->integer('detailProductId')->unsigned();
@@ -31,6 +31,6 @@ class CreateTransactionDetailsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('detail_transactions');
+        Schema::dropIfExists('transaction_details');
     }
 }

@@ -19,7 +19,7 @@ class Transaction extends Model
 
     public function details()
     {
-        return $this->hasMany(TransaksiDetail::class, "transactionId", "detailTransactionId");
+        return $this->hasMany(TransactionDetail::class, "transactionId", "detailTransactionId");
     }
 
     public function user()
