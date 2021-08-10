@@ -75,6 +75,30 @@ class TransactionController extends Controller
         }
     }
 
+    public function history($id)
+    {
+        $transaction = Transaction::with(['user'])->whereHas('user', function ($query) use ($id) {
+            $query->whereId($id);
+        })->get();
+
+        foreach ($transaction as $transaksi) {
+            $details = $transaksi->details;
+            foreach ($details as $detail) {
+                $detail->product;
+            }
+        }
+
+        if (!empty($transaction)) {
+            return response()->json([
+                'success' => 1,
+                'message' => 'Data berhasil ditemukan',
+                'transaksi' => collect($transaction)
+            ]);
+        } else {
+            return $this->error('Data gagal ditemukan');
+        }
+    }
+
     public function error($pesan)
     {
         return response()->json([

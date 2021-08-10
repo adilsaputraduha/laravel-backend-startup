@@ -10,6 +10,12 @@ class Product extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'productName', 'productDescription',
+        'productStore', 'productCategory', 'productPrice', 'productImage',
+        'productStatus', 'productCreatedAt', 'productUpdatedAt'
+    ];
+
     public function list()
     {
         return DB::table('products')

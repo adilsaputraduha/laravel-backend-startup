@@ -29,3 +29,4 @@ Route::get('/store', [StoreController::class, 'list']);
 Route::get('/product-category', [ProductCategoryController::class, 'list']);
 Route::get('/product', [ProductController::class, 'list']);
 Route::post('/checkout', [TransactionController::class, 'save']);
+Route::get('/checkout/{id}', [TransactionController::class, 'history']);

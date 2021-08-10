@@ -19,11 +19,11 @@ class Transaction extends Model
 
     public function details()
     {
-        return $this->hasMany(TransactionDetail::class, "transactionId", "detailTransactionId");
+        return $this->hasMany(TransactionDetail::class, "detailTransactionId", "transactionId");
     }
 
     public function user()
     {
-        return $this->belongsTo(User::class, "userId", "transactionUserId");
+        return $this->belongsTo(User::class, "transactionUserId", "id");
     }
 }
