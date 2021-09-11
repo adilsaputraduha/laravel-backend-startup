@@ -11,6 +11,7 @@ class RoleController extends Controller
     public function __construct()
     {
         $this->role = new Role();
+        $this->middleware('auth');
     }
 
     public function index()
@@ -33,10 +34,8 @@ class RoleController extends Controller
             return redirect('/role')->with('failed-message', 'Data failed to save')->withErrors($validated, 'content');
         } else {
             // Jika validasi berhasil
-            date_default_timezone_set('Asia/Jakarta');
             $data = [
-                'roleName' => Request()->name,
-                'roleCreatedAt' => date('Y-m-d H:i:s')
+                'roleName' => Request()->name
             ];
             $this->role->saveData($data);
             return redirect('/role')->with('success-message', 'Data saved successfully');
@@ -55,11 +54,9 @@ class RoleController extends Controller
             return redirect('/role')->with('failed-message', 'Data failed to update')->withErrors($validated, 'content');
         } else {
             // Jika validasi berhasil
-            date_default_timezone_set('Asia/Jakarta');
             $id = Request()->id;
             $data = [
-                'roleName' => Request()->name,
-                'roleUpdatedAt' => date('Y-m-d H:i:s')
+                'roleName' => Request()->name
             ];
             $this->role->updateData($id, $data);
             return redirect('/role')->with('success-message', 'Data updated successfully');

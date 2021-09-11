@@ -84,7 +84,7 @@
         </div>
     </div>
     <!-- Modal -->
-    <form action="/product-category/save" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('saveproductcategory') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="modal" tabindex="-1" id="addModal">
             <div class="modal-dialog">
@@ -98,6 +98,12 @@
                             <label class="form-label">Name</label>
                             <input type="text" class="form-control" autocomplete="off" name="name"
                                 placeholder="Type new name ..." required />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Image</label>
+                            <div class="input-group mb-3">
+                                <input type="file" class="form-control" required name="image">
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">

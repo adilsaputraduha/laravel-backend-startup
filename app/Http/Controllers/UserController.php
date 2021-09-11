@@ -10,6 +10,7 @@ class UserController extends Controller
     public function __construct()
     {
         $this->user = new User();
+        $this->middleware('auth');
     }
 
     public function index()

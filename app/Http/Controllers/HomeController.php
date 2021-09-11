@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Home;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -13,6 +14,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
+        $this->home = new Home();
         $this->middleware('auth');
     }
 
@@ -23,6 +25,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $data = [
+            'totalrevenue' => $this->home->totalRevenue(),
+            'totalorders' => $this->home->totalOrders(),
+            'totalcustomers' => $this->home->totalCustomers(),
+            'totalproducts' => $this->home->totalProducts(),
+            'latesttransactions' => $this->home->latestTransactions()
+        ];
+        return view('home', $data);
     }
 }

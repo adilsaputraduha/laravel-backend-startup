@@ -10,6 +10,10 @@ class ProductCategory extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'productCategoryName', 'productCategoryImage'
+    ];
+
     public function list()
     {
         return DB::table('product_categories')->get();

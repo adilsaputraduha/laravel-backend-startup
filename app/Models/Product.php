@@ -12,9 +12,25 @@ class Product extends Model
 
     protected $fillable = [
         'productName', 'productDescription',
-        'productStore', 'productCategory', 'productPrice', 'productImage',
-        'productStatus', 'productCreatedAt', 'productUpdatedAt'
+        'productStore', 'productCategory', 'productPrice', 'productStock',
+        'productRating', 'productSold', 'productImage',
+        'productStatus'
     ];
+
+    public function store()
+    {
+        return $this->belongsTo(Store::class, "productStore", "storeId");
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(ProductCategory::class, "productCategory", "productCategoryId");
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class, "reviewProduct", "productId");
+    }
 
     public function list()
     {
@@ -24,9 +40,41 @@ class Product extends Model
             ->get();
     }
 
+    public function latest()
+    {
+        return DB::table('products')
+            ->join('product_categories', 'productCategoryId', '=', 'productCategory')
+            ->join('stores', 'storeId', '=', 'productStore')
+            ->orderByDesc('productCreatedAt')
+            ->get();
+    }
+
+    public function orderby()
+    {
+        return DB::table('products')
+            ->join('product_categories', 'productCategoryId', '=', 'productCategory')
+            ->join('stores', 'storeId', '=', 'productStore')
+            ->orderByDesc('productCreatedAt')
+            ->get();
+    }
+
     public function saveData($data)
     {
         DB::table('products')->insert($data);
+    }
+
+    public function updateRating($data, $id)
+    {
+        DB::table('products')
+            ->where('productId', '=', $id)
+            ->update($data);
+    }
+
+    public function updateStock($dataone, $productId)
+    {
+        DB::table('products')
+            ->where('productId', '=', $productId)
+            ->update($dataone);
     }
 
     public function deleteData($id)

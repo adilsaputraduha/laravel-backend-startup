@@ -3,8 +3,10 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Login | Site Administrator</title>
+    <title>LOGIN : Site Administrator</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Logo -->
+    <link rel="shortcut icon" href="{{ asset('assets') }}/images/logoo.png">
     <!-- Bootstrap Css -->
     <link href="{{ asset('assets') }}/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
     <!-- Icons Css -->
@@ -56,19 +58,11 @@
                                         <input type="checkbox" class="form-check-input" id="remember" name="remember"
                                             {{ old('remember') ? 'checked' : '' }}>
                                         <label class="form-check-label" for="auth-remember-check">Remember me</label>
-
-                                        <div class="float-end">
-                                            <a href="auth-recoverpw.html" class="text-muted">Forgot password?</a>
-                                        </div>
                                     </div>
                                     <div class="mt-4 text-end">
                                         <button class="btn btn-green w-sm waves-effect waves-light" type="submit">
                                             Log In
                                         </button>
-                                    </div>
-                                    <div class="mt-4 text-center">
-                                        <p class="mb-0">Don't have an account ? <a href="auth-register.html"
-                                                class="fw-medium text-green"> Contact Admin </a> </p>
                                     </div>
                                 </form>
                             </div>

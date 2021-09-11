@@ -31,7 +31,6 @@
                                         <th>#</th>
                                         <th>Name</th>
                                         <th>Email</th>
-                                        <th>Role</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -41,7 +40,6 @@
                                             <td>{{ ++$number }}</td>
                                             <td>{{ $data->name }}</td>
                                             <td>{{ $data->email }}</td>
-                                            <td>{{ $data->roleName }}</td>
                                             <td class="text-center">
                                                 <a class="btn btn-green btn-sm mb-1" data-bs-toggle="modal"
                                                     data-bs-target="#editModal{{ $data->id }}">

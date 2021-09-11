@@ -1,0 +1,38 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateMembersTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('members', function (Blueprint $table) {
+            $table->integerIncrements('memberId');
+            $table->string('memberName');
+            $table->string('memberEmail');
+            $table->string('memberPhone');
+            $table->string('memberGender');
+            $table->string('memberAddress');
+            $table->integer('memberStatus');
+            $table->integer('memberCourse');
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('members');
+    }
+}

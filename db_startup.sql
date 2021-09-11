@@ -16,6 +16,24 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/`db_startup` /*!40100 DEFAULT CHARACTER 
 
 USE `db_startup`;
 
+/*Table structure for table `couriers` */
+
+DROP TABLE IF EXISTS `couriers`;
+
+CREATE TABLE `couriers` (
+  `courierId` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `courierName` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `courierPrice` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`courierId`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+/*Data for the table `couriers` */
+
+insert  into `couriers`(`courierId`,`courierName`,`courierPrice`,`created_at`,`updated_at`) values 
+(1,'Organic EXPRESS',10000,'2021-08-12 23:52:54','2021-08-12 23:52:57');
+
 /*Table structure for table `failed_jobs` */
 
 DROP TABLE IF EXISTS `failed_jobs`;
@@ -43,18 +61,21 @@ CREATE TABLE `migrations` (
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `migrations` */
 
 insert  into `migrations`(`id`,`migration`,`batch`) values 
-(1,'2014_10_12_000000_create_users_table',1),
-(2,'2014_10_12_100000_create_password_resets_table',1),
-(3,'2019_08_19_000000_create_failed_jobs_table',1),
 (4,'2021_07_09_234945_create_product_category',2),
 (5,'2021_07_10_004050_create_product_categories',3),
-(6,'2021_08_02_125747_create_transactions_table',4),
-(8,'2021_08_05_165609_create_transaction_details_table',5);
+(12,'2014_10_12_000000_create_users_table',4),
+(13,'2014_10_12_100000_create_password_resets_table',4),
+(14,'2019_08_19_000000_create_failed_jobs_table',4),
+(15,'2021_08_02_125747_create_transactions_table',4),
+(16,'2021_08_05_165609_create_transaction_details_table',4),
+(17,'2021_08_10_025337_create_products_table',4),
+(18,'2021_08_12_110117_create_couriers_table',4),
+(19,'2021_08_17_075500_create_stores_table',5);
 
 /*Table structure for table `password_resets` */
 
@@ -93,24 +114,27 @@ insert  into `product_categories`(`productCategoryId`,`productCategoryName`,`pro
 DROP TABLE IF EXISTS `products`;
 
 CREATE TABLE `products` (
-  `productId` int(11) NOT NULL AUTO_INCREMENT,
-  `productName` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `productDescription` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `productStore` int(11) DEFAULT NULL,
-  `productCategory` int(11) DEFAULT NULL,
-  `productPrice` int(11) DEFAULT NULL,
-  `productImage` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `productStatus` int(1) DEFAULT NULL,
+  `productId` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `productName` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `productDescription` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `productStore` int(10) unsigned NOT NULL,
+  `productCategory` int(10) unsigned NOT NULL,
+  `productPrice` int(11) NOT NULL,
+  `productImage` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `productStatus` int(11) NOT NULL,
   `productCreatedAt` timestamp NULL DEFAULT NULL,
   `productUpdatedAt` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`productId`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `products` */
 
 insert  into `products`(`productId`,`productName`,`productDescription`,`productStore`,`productCategory`,`productPrice`,`productImage`,`productStatus`,`productCreatedAt`,`productUpdatedAt`) values 
-(6,'Pupuk AB 210ml','Murah mantap',1,1,1000,'fc67bbb46dd1f0e6e6683fed96b5be51.jpg',1,'2021-08-06 02:51:22','2021-08-06 02:51:24'),
-(7,'Pupuk AB 210ml','Enak segar',2,1,2000,'fc67bbb46dd1f0e6e6683fed96b5be51.jpg',1,'2021-08-06 03:24:39','2021-08-06 03:24:42');
+(1,'Pupuk Organik Petroganik 10Kg','Pupuk organik yang kaya akan nutrisi sehingga dapat membuat tanaman anda tumbuh subur dan tentunya sehat',1,1,100000,'082021121740625_images.jpg',1,'2021-08-13 00:05:40',NULL),
+(2,'Pupuk Organik Dinosaurus','Baik dan cocok untuk semua tanaman',1,1,90000,'082021121739268_1602eddf1c4fad9a798c87e91587c065.jpg',1,'2021-08-13 00:07:39',NULL),
+(3,'Pupuk Organik Bio Cipt','Serbaguna, cepat, sehat, berhasil dan ramah',1,1,110000,'082021121736547_images_(1).jpg',1,'2021-08-13 00:09:36',NULL),
+(4,'Pupuk Organik Bumi Makmur','Pupuk murah, sehat, dapat menjaga keseimbangan tanah',1,1,130000,'082021121729433_pg_pupuk-petroganik.jpg',1,'2021-08-13 00:11:29',NULL),
+(5,'Pupuk Organik 210ml','Pupuk organik buatan anak bangsa, sehat, murah, dan serbaguna',1,1,80000,'08202112172537_fc67bbb46dd1f0e6e6683fed96b5be51.jpg',1,'2021-08-13 00:12:25',NULL);
 
 /*Table structure for table `roles` */
 
@@ -136,23 +160,24 @@ insert  into `roles`(`roleId`,`roleName`,`roleCreatedAt`,`roleUpdatedAt`) values
 DROP TABLE IF EXISTS `stores`;
 
 CREATE TABLE `stores` (
-  `storeId` int(11) NOT NULL AUTO_INCREMENT,
-  `storeName` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `storeEmail` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `storePhoneNumber` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `storeStreet` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `storeDistrict` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `storeCity` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `storeProvince` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `storeZipCode` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `storeId` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `storeName` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `storeEmail` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `storePhoneNumber` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `storeStreet` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `storeDistrict` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `storeCity` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `storeProvince` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `storeZipCode` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`storeId`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `stores` */
 
-insert  into `stores`(`storeId`,`storeName`,`storeEmail`,`storePhoneNumber`,`storeStreet`,`storeDistrict`,`storeCity`,`storeProvince`,`storeZipCode`) values 
-(1,'Toko Agro Jaya','agrojaya18@gmail.com','083190901800','Jl. Cemara A. 12','Koto Tangah','Padang','Sumatera Barat','25171'),
-(2,'Toko 3 Saudara','tigasaudara18@gmail.com','083190901800','Jl. Anggrek B. 14','Padang Timur','Padang','Sumatera Barat','25181');
+insert  into `stores`(`storeId`,`storeName`,`storeEmail`,`storePhoneNumber`,`storeStreet`,`storeDistrict`,`storeCity`,`storeProvince`,`storeZipCode`,`created_at`,`updated_at`) values 
+(1,'Toko Organic Jaya','organicjaya@gmai.com','081234342123','Jalan Perkutut No. 3 RT 03 RW 05','Koto Tangah','Padang','Sumatera Barat','25171','2021-08-17 15:00:35','2021-08-17 15:00:37');
 
 /*Table structure for table `transaction_details` */
 
@@ -168,9 +193,16 @@ CREATE TABLE `transaction_details` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`detailId`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `transaction_details` */
+
+insert  into `transaction_details`(`detailId`,`detailTransactionId`,`detailProductId`,`detailTotalItem`,`detailTotalPrice`,`detailNote`,`created_at`,`updated_at`) values 
+(21,14,1,1,100000,'Catatan','2021-08-19 08:04:25','2021-08-19 08:04:25'),
+(22,15,1,1,100000,'Catatan','2021-08-19 08:06:51','2021-08-19 08:06:51'),
+(23,16,2,1,90000,'Catatan','2021-08-19 08:08:22','2021-08-19 08:08:22'),
+(24,17,1,1,100000,'Catatan','2021-08-19 18:32:47','2021-08-19 18:32:47'),
+(25,18,1,1,100000,'Catatan','2021-08-20 01:36:40','2021-08-20 01:36:40');
 
 /*Table structure for table `transactions` */
 
@@ -187,6 +219,9 @@ CREATE TABLE `transactions` (
   `transactionStatus` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `transactionReceipt` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `transactionCourier` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `transactionCostShipping` int(11) NOT NULL,
+  `transactionTotalTransfer` bigint(20) NOT NULL,
+  `transactionBank` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `transactionName` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `transactionPhone` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `transactionLocationDetail` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -196,9 +231,13 @@ CREATE TABLE `transactions` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`transactionId`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `transactions` */
+
+insert  into `transactions`(`transactionId`,`transactionUserId`,`transactionPaymentCode`,`transactionCode`,`transactionTotalItem`,`transactionTotalPrice`,`transactionUniqueCode`,`transactionStatus`,`transactionReceipt`,`transactionCourier`,`transactionCostShipping`,`transactionTotalTransfer`,`transactionBank`,`transactionName`,`transactionPhone`,`transactionLocationDetail`,`transactionDescription`,`transactionMethod`,`transactionExpiredAt`,`created_at`,`updated_at`) values 
+(17,1,'INV-PYM-20210819-170','INV-PYM-20210819-309',1,100000,267,'BATAL',NULL,'1',10000,110000,NULL,'Adil Saputra Duha','082171538531','Komp. Parupuk Raya Blok H.6 RT 05 RW 15, Kecamatan , Padang, Provinsi Sumatera Barat - 25112',NULL,'COD','2021-08-20 18:32:47','2021-08-19 18:32:47','2021-08-19 18:32:47'),
+(18,1,'INV-PYM-20210820-316','INV-PYM-20210820-865',1,100000,835,'DIPROSES',NULL,'1',10000,110000,'Bank Mandiri','Adil Saputra Duha','082171538531','Komp. Parupuk Raya Blok H.6 RT 05 RW 15, Kecamatan , Padang, Provinsi Sumatera Barat - 25112',NULL,'Transfer Bank','2021-08-21 01:36:40','2021-08-20 01:36:40','2021-08-20 01:36:40');
 
 /*Table structure for table `users` */
 
@@ -213,15 +252,14 @@ CREATE TABLE `users` (
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `role` int(1) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `users` */
 
-insert  into `users`(`id`,`name`,`email`,`email_verified_at`,`password`,`remember_token`,`created_at`,`updated_at`,`role`) values 
-(1,'Adil Saputra Duha','adilsaputra0101@gmail.com',NULL,'$2y$10$s2Fn4A4d61BdQ0nSEFvHpeeZS.OwojNgDF6Xp3LdAyi7knfs649QO',NULL,'2021-07-11 13:37:40','2021-07-11 13:37:40',1);
+insert  into `users`(`id`,`name`,`email`,`email_verified_at`,`password`,`remember_token`,`created_at`,`updated_at`) values 
+(1,'Adil Saputra Duha','adilsaputra0101@gmail.com',NULL,'$2y$10$MjPtA6rkMAhR.AyE/LhivucqHZSlukWfKqqexwTjTOkUQVquv3ke6',NULL,'2021-08-12 16:54:36','2021-08-12 16:54:36');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

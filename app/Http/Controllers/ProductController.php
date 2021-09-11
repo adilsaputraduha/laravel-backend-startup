@@ -15,6 +15,7 @@ class ProductController extends Controller
         $this->product = new Product();
         $this->store = new Store();
         $this->productCategory = new ProductCategory();
+        $this->middleware('auth');
     }
 
     public function index()
@@ -32,6 +33,7 @@ class ProductController extends Controller
         $validated = Validator::make($request->all(), [
             'name' => 'required|max:100',
             'price' => 'required|max:11',
+            'stock' => 'required|max:10',
             'description' => 'required|max:255',
             'store' => 'required|max:11',
             'productcategory' => 'required|max:11',
@@ -50,16 +52,18 @@ class ProductController extends Controller
                 $fileName =  date('mYdHs') . rand(1, 999) . '_' . $file;
                 $request->image->storeAs('public/images/products', $fileName);
             }
-            date_default_timezone_set('Asia/Jakarta');
+
             $data = [
                 'productName' => Request()->name,
                 'productPrice' => Request()->price,
+                'productStock' => Request()->stock,
                 'productStore' => Request()->store,
                 'productCategory' => Request()->productcategory,
                 'productDescription' => Request()->description,
                 'productImage' => $fileName,
+                'productRating' => 5,
+                'productSold' => 1,
                 'productStatus' => Request()->status,
-                'productCreatedAt' => date('Y-m-d H:i:s')
             ];
             $this->product->saveData($data);
             return redirect('/product')->with('success-message', 'Data saved successfully');

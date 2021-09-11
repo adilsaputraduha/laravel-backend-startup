@@ -84,7 +84,7 @@
         </div>
     </div>
     <!-- Modal -->
-    <form action="/role/save" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('saverole') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="modal" tabindex="-1" id="addModal">
             <div class="modal-dialog">
@@ -109,7 +109,7 @@
         </div>
     </form>
     @foreach ($role as $data)
-        <form action="/role/update" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('updaterole') }}" method="POST" enctype="multipart/form-data">
             @method('PUT')
             @csrf
             <div class="modal" tabindex="-1" id="editModal{{ $data->roleId }}">
@@ -135,7 +135,7 @@
                 </div>
             </div>
         </form>
-        <form action="/role/delete" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('deleterole') }}" method="POST" enctype="multipart/form-data">
             @method('DELETE')
             @csrf
             <div class="modal" tabindex="-1" id="deleteModal{{ $data->roleId }}">

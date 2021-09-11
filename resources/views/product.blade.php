@@ -21,6 +21,21 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
+                            @if (session('success-message'))
+                            <div class="alert alert-green alert-dismissible fade show" role="alert">
+                                {{ session('success-message') }}
+                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"
+                                    aria-label="Close">
+                                </button>
+                            </div>
+                            @elseif (session('failed-message'))
+                                <div class="alert alert-red alert-dismissible fade show" role="alert">
+                                    {{ session('failed-message') }} : {{ $errors->content->first() }}
+                                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"
+                                        aria-label="Close">
+                                    </button>
+                                </div>
+                            @endif
                             <button type="button" class="btn btn-green mb-3" data-bs-toggle="modal"
                                 data-bs-target="#addModal">Add new</button>
                             <div class="table-responsive">
@@ -96,7 +111,7 @@
         </div>
     </div>
     <!-- Modal -->
-    <form action="/product/save" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('productsave') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="modal" tabindex="-1" id="addModal">
             <div class="modal-dialog modal-lg">
@@ -124,7 +139,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-sm-6">
+                            <div class="col-sm-4">
                                 <div class="mb-3">
                                     <label class="form-label">Product Category</label>
                                     <select class="form-select" name="productcategory" required>
@@ -136,7 +151,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-4">
                                 <div class="mb-3">
                                     <label class="form-label">Store</label>
                                     <select class="form-select" name="store" required>
@@ -144,6 +159,14 @@
                                             <option value="{{ $data->storeId }}">{{ $data->storeName }}</option>
                                         @endforeach
                                     </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="mb-3">
+                                    <label class="form-label">Stock</label>
+                                    <input type="text" class="form-control" autocomplete="off"
+                                        onkeypress="return onlyNumber(event)" name="stock" placeholder="Type new stock ..."
+                                        required />
                                 </div>
                             </div>
                         </div>
@@ -193,7 +216,7 @@
             @method('PUT')
             @csrf
             <div class="modal" tabindex="-1" id="editModal{{ $data->productId }}">
-                <div class="modal-dialog">
+                <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title">Update product category</h5>
@@ -201,10 +224,87 @@
                         </div>
                         <div class="modal-body">
                             <input type="hidden" value="{{ $data->productId }}" name="id" required />
-                            <div class="mb-3">
-                                <label class="form-label">Name</label>
-                                <input type="text" class="form-control" value="{{ $data->productName }}"
-                                    autocomplete="off" name="name" placeholder="Type new name ..." required />
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Name</label>
+                                        <input type="text" value="{{ $data->productName }}" class="form-control" autocomplete="off" name="name"
+                                            placeholder="Type new name ..." required />
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Price</label>
+                                        <input type="text" value="{{ $data->productPrice }}" class="form-control" autocomplete="off"
+                                            onkeypress="return onlyNumber(event)" name="price" placeholder="Type new price ..."
+                                            required />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="mb-3">
+                                        <label class="form-label">Product Category</label>
+                                        <select class="form-select" name="productcategory" required>
+                                            @foreach ($productCategory as $dataone)
+                                                <option value="{{ $dataone->productCategoryId }}">
+                                                    {{ $dataone->productCategoryName }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="mb-3">
+                                        <label class="form-label">Store</label>
+                                        <select class="form-select" name="store" required>
+                                            @foreach ($store as $datatwo)
+                                                <option value="{{ $datatwo->storeId }}">{{ $datatwo->storeName }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="mb-3">
+                                        <label class="form-label">Stock</label>
+                                        <input type="text" class="form-control" value="{{ $data->productStock }}" autocomplete="off"
+                                            onkeypress="return onlyNumber(event)" name="stock" placeholder="Type new stock ..."
+                                            required />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="mb-3">
+                                        <label class="form-label">Description</label>
+                                        <textarea class="form-control" placeholder="Type new description ..." name="description"
+                                            style="height: 100px" required>{{ $data->productDescription }}
+                                        </textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label class="form-label">Status</label>
+                                    <div class="mb-3">
+                                        <div class="form-check form-check-inline mt-2">
+                                            <input class="form-check-input" type="radio" name="status" id="status1" value="0"
+                                                required>
+                                            <label class="form-check-label" for="status1">Non Publish</label>
+                                        </div>
+                                        <div class="form-check form-check-inline mt-2">
+                                            <input class="form-check-input" type="radio" name="status" id="status2" value="1"
+                                                required>
+                                            <label class="form-check-label" for="status2">Publish</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label class="form-label">Image</label>
+                                    <div class="input-group mb-3">
+                                        <input type="file" class="form-control" required name="image">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -215,6 +315,8 @@
                 </div>
             </div>
         </form>
+    @endforeach
+    @foreach ($product as $data)
         <form action="/product/delete" method="POST">
             @method('DELETE')
             @csrf

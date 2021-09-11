@@ -24,12 +24,16 @@ class CreateTransactionsTable extends Migration
             $table->string('transactionStatus')->nullable();
             $table->string('transactionReceipt')->nullable();
             $table->string('transactionCourier')->nullable();
+            $table->integer('transactionCostShipping');
+            $table->bigInteger('transactionTotalTransfer');
+            $table->string('transactionBank')->nullable();
             $table->string('transactionName')->nullable();
             $table->string('transactionPhone')->nullable();
             $table->string('transactionLocationDetail')->nullable();
             $table->string('transactionDescription')->nullable();
             $table->string('transactionMethod')->nullable();
             $table->timestamp('transactionExpiredAt')->nullable();
+            $table->timestamp('transactionCreatedAt')->nullable();
             $table->timestamps();
         });
     }

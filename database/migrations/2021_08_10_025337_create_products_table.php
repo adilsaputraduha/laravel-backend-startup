@@ -20,6 +20,9 @@ class CreateProductsTable extends Migration
             $table->integer('productStore')->unsigned();
             $table->integer('productCategory')->unsigned();
             $table->integer('productPrice');
+            $table->integer('productStock');
+            $table->string('productRating');
+            $table->string('productSold');
             $table->string('productImage');
             $table->integer('productStatus');
             $table->timestamps();

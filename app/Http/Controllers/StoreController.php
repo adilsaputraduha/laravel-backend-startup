@@ -10,6 +10,7 @@ class StoreController extends Controller
     public function __construct()
     {
         $this->store = new Store();
+        $this->middleware('auth');
     }
 
     public function index()

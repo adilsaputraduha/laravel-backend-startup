@@ -11,6 +11,7 @@ class ProductCategoryController extends Controller
     public function __construct()
     {
         $this->productCategory = new ProductCategory();
+        $this->middleware('auth');
     }
 
     public function index()
@@ -25,7 +26,8 @@ class ProductCategoryController extends Controller
     {
         // Membuat validasi
         $validated = Validator::make($request->all(), [
-            'name' => 'required|max:255'
+            'name' => 'required|max:255',
+            'image' => 'required'
         ]);
 
         if ($validated->fails()) {
@@ -33,10 +35,17 @@ class ProductCategoryController extends Controller
             return redirect('/product-category')->with('failed-message', 'Data failed to save')->withErrors($validated, 'content');
         } else {
             // Jika validasi berhasil
+            $file = '';
+            if ($request->image->getClientOriginalName()) {
+                $file = str_replace(' ', '_', $request->image->getClientOriginalName());
+                $fileName =  date('mYdHs') . rand(1, 999) . '_' . $file;
+                $request->image->storeAs('public/images/productcategory', $fileName);
+            }
+
             date_default_timezone_set('Asia/Jakarta');
             $data = [
                 'productCategoryName' => Request()->name,
-                'productCategoryCreatedAt' => date('Y-m-d H:i:s')
+                'productCategoryImage' => $fileName
             ];
             $this->productCategory->saveData($data);
             return redirect('/product-category')->with('success-message', 'Data saved successfully');

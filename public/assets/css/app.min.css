@@ -65,6 +65,10 @@ body:not(.vertical-collpsed) .app-search {
 .logo-light {
     display: none;
 }
+
+.logo-dark {
+    display: block;
+}
 .app-search {
     padding: calc(32px / 2) 0;
 }
@@ -3767,11 +3771,11 @@ table.dataTable.dtr-inline.collapsed > tbody > tr > td.dtr-control:before {
 
 .btn-green:hover {
     color: #fff;
-    background-color: #007a0e;
+    background-color: #00aa13;
 }
 
 .text-green {
-    color: #007a0e;
+    color: #00aa13;
 }
 
 .text-green:hover {
@@ -3786,4 +3790,9 @@ table.dataTable.dtr-inline.collapsed > tbody > tr > td.dtr-control:before {
 .alert-red {
     color: #fff;
     background-color: #a80000;
+}
+
+.bg-success{
+    color: #fff;
+    background-color: #00aa13;
 }
