@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>ORGANIK KITA : Site Administrator</title>
+    <title>ORGANIKITA : Site Administrator</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Logo -->
     <link rel="shortcut icon" href="{{ asset('assets') }}/images/logoo.png">
@@ -245,6 +245,13 @@
                                 <span>Testimonial</span>
                             </a>
                         </li>
+                        <li class="menu-title">Blogs</li>
+                        {{-- <li>
+                            <a href="{{ route('membercourse') }}" class="___class_+?99___">
+                                <i class="fa fa-users me-2" data-inline="false"></i>
+                                <span>Member Course</span>
+                            </a>
+                        </li> --}}
                         <li class="menu-title">Reports</li>
                     </ul>
                 </div>

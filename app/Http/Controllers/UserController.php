@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -12,13 +13,15 @@ class UserController extends Controller
     public function __construct()
     {
         $this->user = new User();
+        $this->role = new Role();
         $this->middleware('auth');
     }
 
     public function index()
     {
         $data = [
-            'user' => $this->user->list()
+            'user' => $this->user->list(),
+            'role' => $this->role->list()
         ];
         return view('user', $data);
     }
@@ -27,10 +30,9 @@ class UserController extends Controller
     {
         // Membuat validasi
         $validated = Validator::make($request->all(), [
-            'name' => 'required|max:15',
+            'name' => 'required|max:20',
             'email' => 'required|email|unique:users',
-            'password' => 'required|min:6',
-            'password_confirmation' => 'required|same:password|min:6'
+            'role' => 'required',
         ]);
 
         if ($validated->fails()) {
@@ -38,12 +40,14 @@ class UserController extends Controller
             return redirect('/user')->with('failed-message', 'Data failed to save')->withErrors($validated, 'content');
         } else {
             // Jika validasi berhasil
+            $password = '123456';
             date_default_timezone_set('Asia/Jakarta');
             $data = [
                 'name' => Request()->name,
                 'email' => Request()->email,
-                'password' => Hash::make(Request()->password),
-                'created_at' => date('Y-m-d H:i:s')
+                'password' => Hash::make($password),
+                'created_at' => date('Y-m-d H:i:s'),
+                'role' => Request()->role
             ];
             $this->user->saveData($data);
             return redirect('/user')->with('success-message', 'Data saved successfully');
@@ -54,10 +58,8 @@ class UserController extends Controller
     {
         // Membuat validasi
         $validated = Validator::make($request->all(), [
-            'name' => 'required|max:15',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|min:6',
-            'password_confirmation' => 'required|same:password|min:6'
+            'name' => 'required|max:20',
+            'role' => 'required'
         ]);
 
         if ($validated->fails()) {
@@ -69,9 +71,8 @@ class UserController extends Controller
             $id = Request()->id;
             $data = [
                 'name' => Request()->name,
-                'email' => Request()->email,
-                'password' => Hash::make(Request()->password),
-                'updated_at' => date('Y-m-d H:i:s')
+                'updated_at' => date('Y-m-d H:i:s'),
+                'role' => Request()->role
             ];
             $this->user->updateData($id, $data);
             return redirect('/user')->with('success-message', 'Data updated successfully');
@@ -83,5 +84,15 @@ class UserController extends Controller
         $id = Request()->id;
         $this->user->deleteData($id);
         return redirect('/user')->with('success-message', 'Data deleted successfully');
+    }
+
+    public function reset()
+    {
+        $id = Request()->id;
+        $data = [
+            'password' => Hash::make('123456'),
+        ];
+        $this->user->resetData($id, $data);
+        return redirect('/user')->with('success-message', 'Password has been reset');
     }
 }

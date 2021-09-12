@@ -15,6 +15,7 @@ class User extends Authenticatable
     public function list()
     {
         return DB::table('users')
+            ->join('roles', 'roleId', '=', 'role')
             ->get();
     }
 
@@ -35,6 +36,13 @@ class User extends Authenticatable
         DB::table('users')
             ->where('id', '=', $id)
             ->delete();
+    }
+
+    public function resetData($id, $data)
+    {
+        DB::table('users')
+            ->where('id', '=', $id)
+            ->update($data);
     }
 
     /**

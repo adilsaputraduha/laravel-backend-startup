@@ -46,6 +46,7 @@
                                         <th>#</th>
                                         <th>Name</th>
                                         <th>Email</th>
+                                        <th>Role</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -55,6 +56,9 @@
                                             <td>{{ ++$number }}</td>
                                             <td>{{ $data->name }}</td>
                                             <td>{{ $data->email }}</td>
+                                            <td>
+                                                <span class="badge bg-green">{{ $data->roleName }}</span>
+                                            </td>
                                             <td class="text-center">
                                                 <a class="btn btn-green btn-sm mb-1" data-bs-toggle="modal"
                                                     data-bs-target="#editModal{{ $data->id }}">
@@ -126,21 +130,12 @@
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Password</label>
-                            <input type="password" class="form-control @error('password') is-invalid @enderror"
-                                autocomplete="new-password" name="password" id="password"
-                                placeholder="Type new password ..." required />
-                            @error('password')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Confirm Password</label>
-                            <input type="password" class="form-control" autocomplete="new-password"
-                                name="password_confirmation" id="password-confirm" placeholder="Type confirm password ..."
-                                required />
+                            <label class="form-label">Role</label>
+                            <select class="form-select" name="role" required>
+                                @foreach ($role as $dataone)
+                                    <option value="{{ $dataone->roleId }}">{{ $dataone->roleName }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -170,9 +165,16 @@
                                     name="name" placeholder="Type new name ..." required />
                             </div>
                             <div class="mb-3">
-                                <label class="form-label">Email</label>
-                                <input type="text" class="form-control" value="{{ $data->name }}" autocomplete="off"
-                                    name="name" placeholder="Type new name ..." required />
+                                <label class="form-label">Role</label>
+                                <select class="form-select" name="role" required>
+                                    @foreach ($role as $dataone)
+                                        @if ($dataone->roleId == $data->role)
+                                            <option selected value="{{ $data->role }}">{{ $dataone->roleName }}</option>
+                                        @else
+                                            <option value="{{ $dataone->roleId }}">{{ $dataone->roleName }}</option>
+                                        @endif
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -196,6 +198,28 @@
                         <div class="modal-body">
                             <input type="hidden" name="id" required value="{{ $data->id }}" />
                             <h6>Are you sure you delete this data?</h6>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                            <button type="submit" class="btn btn-green">Yes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <form action="{{ route('userreset') }}" method="POST">
+            @method('PUT')
+            @csrf
+            <div class="modal" tabindex="-1" id="resetModal{{ $data->id }}">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Reset password user</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <input type="hidden" name="id" required value="{{ $data->id }}" />
+                            <h6>Are you sure you reset password this data?</h6>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>

@@ -32,6 +32,7 @@ Route::get('/user', [UserController::class, 'index'])->name('user');
 Route::post('/user/save', [UserController::class, 'save'])->name('usersave');
 Route::put('/user/update', [UserController::class, 'update'])->name('userupdate');
 Route::delete('/user/delete', [UserController::class, 'delete'])->name('userdelete');
+Route::put('/user/reset', [UserController::class, 'reset'])->name('userreset');
 // Customer
 Route::get('/customer', [CustomerController::class, 'index'])->name('customer');
 // Product Category
