@@ -107,8 +107,8 @@
                                                     {{ $data->transactionDescription }}
                                                 @endif
                                             </li>
-                                            <li class="list-group-item">{{ $data->transactionCreatedAt }}</li>
-                                            <li class="list-group-item">{{ $data->transactionExpiredAt }}</li>
+                                            <li class="list-group-item">{{ date('d M Y H:i:s', strtotime( $data->transactionCreatedAt)) }}</li>
+                                            <li class="list-group-item">{{ date('d M Y H:i:s', strtotime( $data->transactionExpiredAt)) }}</li>
                                         </ul>
                                     @endforeach
                                 </div>

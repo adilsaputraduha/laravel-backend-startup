@@ -18,6 +18,7 @@
         type="text/css" />
     <link href="{{ asset('assets') }}/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet"
         type="text/css" />
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
     <!-- Responsive datatable examples -->
     <link href="{{ asset('assets') }}/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css"
         rel="stylesheet" type="text/css" />
@@ -246,12 +247,12 @@
                             </a>
                         </li>
                         <li class="menu-title">Blogs</li>
-                        {{-- <li>
-                            <a href="{{ route('membercourse') }}" class="___class_+?99___">
-                                <i class="fa fa-users me-2" data-inline="false"></i>
-                                <span>Member Course</span>
+                        <li class="{{ request()->is('blog/add') ? 'mm-active' : '' }}">
+                            <a href="{{ route('blog') }}"  class="{{ request()->is('blog/add') ? 'mm-active' : '' }}">
+                                <i class="fab fa-blogger-b me-2" data-inline="false"></i>
+                                <span>Blog</span>
                             </a>
-                        </li> --}}
+                        </li>
                         <li class="menu-title">Reports</li>
                     </ul>
                 </div>

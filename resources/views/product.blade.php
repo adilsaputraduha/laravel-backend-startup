@@ -317,7 +317,7 @@
         </form>
     @endforeach
     @foreach ($product as $data)
-        <form action="/product/delete" method="POST">
+        <form action="{{ route('productdelete') }}" method="POST">
             @method('DELETE')
             @csrf
             <div class="modal" tabindex="-1" id="deleteModal{{ $data->productId }}">

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\HomeController;
@@ -51,7 +52,7 @@ Route::get('/store', [StoreController::class, 'index'])->name('store');
 Route::get('/product', [ProductController::class, 'index'])->name('product');
 Route::post('/product/save', [ProductController::class, 'save'])->name('productsave');
 Route::put('/product/update', [ProductController::class, 'update'])->name('productupdate');
-Route::delete('/product/delete', [ProductController::class, 'delete']);
+Route::delete('/product/delete', [ProductController::class, 'delete'])->name('productdelete');
 // Transaction
 Route::get('/transaction', [TransactionController::class, 'index'])->name('transaction');
 Route::get('/transaction-by-status', [TransactionController::class, 'detail'])->name('transactionbystatus');
@@ -69,6 +70,10 @@ Route::get('/member', [MemberController::class, 'index'])->name('membercourse');
 Route::post('/member/updatestatus', [MemberController::class, 'updatestatus'])->name('updatestatusmember');
 // Testimonial
 Route::get('/testimonial', [TestimonialCourseController::class, 'index'])->name('testimonial');
+// Blog
+Route::get('/blog', [BlogController::class, 'index'])->name('blog');
+Route::get('/blog/add', [BlogController::class, 'add'])->name('blogadd');
+Route::post('/blog/save', [BlogController::class, 'save'])->name('blogsave');
 
 Auth::routes();
 
