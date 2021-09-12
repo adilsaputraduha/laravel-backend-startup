@@ -22,6 +22,21 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
+                            @if (session('success-message'))
+                                <div class="alert alert-green alert-dismissible fade show" role="alert">
+                                    {{ session('success-message') }}
+                                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"
+                                        aria-label="Close">
+                                    </button>
+                                </div>
+                            @elseif (session('failed-message'))
+                                <div class="alert alert-red alert-dismissible fade show" role="alert">
+                                    {{ session('failed-message') }} : {{ $errors->content->first() }}
+                                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"
+                                        aria-label="Close">
+                                    </button>
+                                </div>
+                            @endif
                             <button type="button" class="btn btn-green mb-3" data-bs-toggle="modal"
                                 data-bs-target="#addModal">Add new</button>
                             <table id="datatable" class="table table-centered dt-responsive table-nowrap mb-0"
@@ -59,6 +74,13 @@
                                                             d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
                                                     </svg>
                                                 </a>
+                                                <a class="btn btn-green btn-sm mb-1" data-bs-toggle="modal"
+                                                    data-bs-target="#resetModal{{ $data->id }}">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-counterclockwise" viewBox="0 0 16 16">
+                                                        <path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z"/>
+                                                        <path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z"/>
+                                                    </svg>
+                                                </a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -71,7 +93,7 @@
         </div>
     </div>
     <!-- Modal -->
-    <form action="/user/save" method="POST">
+    <form action="{{ route('usersave') }}" method="POST">
         @csrf
         <div class="modal" tabindex="-1" id="addModal">
             <div class="modal-dialog">
@@ -130,7 +152,7 @@
         </div>
     </form>
     @foreach ($user as $data)
-        <form action="/user/update" method="POST">
+        <form action="{{ route('userupdate') }}" method="POST">
             @method('PUT')
             @csrf
             <div class="modal" tabindex="-1" id="editModal{{ $data->id }}">
@@ -147,6 +169,11 @@
                                 <input type="text" class="form-control" value="{{ $data->name }}" autocomplete="off"
                                     name="name" placeholder="Type new name ..." required />
                             </div>
+                            <div class="mb-3">
+                                <label class="form-label">Email</label>
+                                <input type="text" class="form-control" value="{{ $data->name }}" autocomplete="off"
+                                    name="name" placeholder="Type new name ..." required />
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -156,7 +183,7 @@
                 </div>
             </div>
         </form>
-        <form action="/user/delete" method="POST">
+        <form action="{{ route('userdelete') }}" method="POST">
             @method('DELETE')
             @csrf
             <div class="modal" tabindex="-1" id="deleteModal{{ $data->id }}">

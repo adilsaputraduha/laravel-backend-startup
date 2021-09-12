@@ -122,7 +122,7 @@
                         <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <img
                                 class="rounded-circle header-profile-user"
-                                src="{{ asset('assets') }}/images/avatar.jpg" alt="Header Avatar"> <span
+                                src="{{ asset('assets') }}/images/image_one.png" alt="Header Avatar"> <span
                                 class="d-none d-xl-inline-block ms-1 fw-medium font-size-14">
                                 @guest @else{{ Auth::user()->name }} @endguest</span>
                             <i class="uil-angle-down d-none d-xl-inline-block font-size-15"></i> </button>
@@ -224,16 +224,14 @@
                         </li>
                         <li class="menu-title">Courses</li>
                         <li>
-                            <a href="{{ route('feature') }}" class="___class_+?97___">
-                                <i class="far fa-star me-2" data-inline="false"></i>
-                                <span>Feature</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('course') }}" class="___class_+?99___">
+                            <a href="javascript: void(0);" class="has-arrow waves-effect">
                                 <i class="fab fa-discourse me-2" data-inline="false"></i>
-                                <span>Course</span>
+                                <span>Courses</span>
                             </a>
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li><a href="{{ route('feature') }}">Feature</a></li>
+                                <li><a href="{{ route('course') }}">Course</a></li>
+                            </ul>
                         </li>
                         <li>
                             <a href="{{ route('membercourse') }}" class="___class_+?99___">
@@ -241,6 +239,13 @@
                                 <span>Member Course</span>
                             </a>
                         </li>
+                        <li>
+                            <a href="{{ route('testimonial') }}" class="___class_+?99___">
+                                <i class="far fa-comments me-2" data-inline="false"></i>
+                                <span>Testimonial</span>
+                            </a>
+                        </li>
+                        <li class="menu-title">Reports</li>
                     </ul>
                 </div>
                 <!-- Sidebar -->

@@ -20,4 +20,22 @@ class Member extends Model
         return DB::table('members')
             ->get();
     }
+
+    public function listStatusWaiting()
+    {
+        return DB::table('members')->where('memberStatus', 0)->get();
+    }
+
+    public function listStatusRegistered()
+    {
+        return DB::table('members')->where('memberStatus', 1)->get();
+    }
+
+
+    public function updateStatus($id, $data)
+    {
+        DB::table('members')
+            ->where('memberId', '=', $id)
+            ->update($data);
+    }
 }

@@ -11,6 +11,7 @@ use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\FeatureController;
 use App\Http\Controllers\MemberController;
+use App\Http\Controllers\TestimonialCourseController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -28,7 +29,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 // User
 Route::get('/user', [UserController::class, 'index'])->name('user');
-Route::post('/user/save', [UserController::class, 'save']);
+Route::post('/user/save', [UserController::class, 'save'])->name('usersave');
+Route::put('/user/update', [UserController::class, 'update'])->name('userupdate');
+Route::delete('/user/delete', [UserController::class, 'delete'])->name('userdelete');
 // Customer
 Route::get('/customer', [CustomerController::class, 'index'])->name('customer');
 // Product Category
@@ -62,6 +65,9 @@ Route::get('/review', [ReviewController::class, 'index'])->name('review');
 Route::get('/feature', [FeatureController::class, 'index'])->name('feature');
 // Member
 Route::get('/member', [MemberController::class, 'index'])->name('membercourse');
+Route::post('/member/updatestatus', [MemberController::class, 'updatestatus'])->name('updatestatusmember');
+// Testimonial
+Route::get('/testimonial', [TestimonialCourseController::class, 'index'])->name('testimonial');
 
 Auth::routes();
 

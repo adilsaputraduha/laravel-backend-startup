@@ -16,8 +16,21 @@ class MemberController extends Controller
     public function index()
     {
         $data = [
-            'membercourse' => $this->member->list()
+            'membercourse' => $this->member->listStatusWaiting(),
+            'membercourseregistered' => $this->member->listStatusRegistered()
         ];
         return view('member-course', $data);
+    }
+
+    public function updatestatus()
+    {
+        $id = Request()->id;
+
+        $data = [
+            'memberStatus' => Request()->status
+        ];
+
+        $this->member->updatestatus($id, $data);
+        return redirect('/member')->with('success-message', 'Data updated successfully');
     }
 }
