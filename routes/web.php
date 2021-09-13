@@ -74,6 +74,7 @@ Route::get('/testimonial', [TestimonialCourseController::class, 'index'])->name(
 Route::get('/blog', [BlogController::class, 'index'])->name('blog');
 Route::get('/blog/add', [BlogController::class, 'add'])->name('blogadd');
 Route::post('/blog/save', [BlogController::class, 'save'])->name('blogsave');
+Route::delete('/blog/delete', [BlogController::class, 'delete'])->name('blogdelete');
 
 Auth::routes();
 

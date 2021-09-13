@@ -64,4 +64,11 @@ class BlogController extends Controller
             return redirect('/blog')->with('success-message', 'Data saved successfully');
         }
     }
+
+    public function delete()
+    {
+        $id = Request()->id;
+        $this->blog->deleteData($id);
+        return redirect('/blog')->with('success-message', 'Data deleted successfully');
+    }
 }

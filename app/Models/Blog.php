@@ -25,4 +25,11 @@ class Blog extends Model
     {
         DB::table('blogs')->insert($data);
     }
+
+    public function deleteData($id)
+    {
+        DB::table('blogs')
+            ->where('blogId', '=', $id)
+            ->delete();
+    }
 }
