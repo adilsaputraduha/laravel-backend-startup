@@ -105,4 +105,21 @@ class ProductController extends Controller
             'product' => $data
         ]);
     }
+
+    // Partner
+
+    public function partnerlist($id)
+    {
+        $products = Product::with(['category', 'store'])->where('productStore', $id)->get();
+
+        foreach ($products as $product) {
+            $product->reviews;
+        }
+
+        return response()->json([
+            'success' => 1,
+            'message' => 'Data berhasil ditemukan',
+            'product' =>  collect($products)
+        ]);
+    }
 }

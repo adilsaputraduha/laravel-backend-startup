@@ -19,6 +19,13 @@ class ProductCategory extends Model
         return DB::table('product_categories')->get();
     }
 
+    public function categoryProduct($id)
+    {
+        return DB::table('product_categories')
+            ->where('productCategoryId', '=', $id)
+            ->get();
+    }
+
     public function saveData($data)
     {
         DB::table('product_categories')->insert($data);

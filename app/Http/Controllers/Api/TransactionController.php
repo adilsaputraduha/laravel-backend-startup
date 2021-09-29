@@ -179,6 +179,106 @@ class TransactionController extends Controller
             'image' => $file
         ]);
     }
+
+    // Partner history
+    public function partnerhistory($id)
+    {
+        $transaction = Transaction::with(['customer'])->where('transactionStore', $id)->orderBy("transactionId", "desc")->get();
+
+        foreach ($transaction as $transaksi) {
+            $details = $transaksi->details;
+            foreach ($details as $detail) {
+                $detail->product->store;
+            }
+        }
+
+        if (count($transaction) == 0) {
+            return response()->json([
+                'success' => 1,
+                'message' => 'Data berhasil ditemukan',
+                'istheretransaction' => false,
+                'transaksis' => collect($transaction)
+            ]);
+        } else if (count($transaction) > 0) {
+            return response()->json([
+                'success' => 1,
+                'message' => 'Data berhasil ditemukan',
+                'istheretransaction' => true,
+                'transaksis' => collect($transaction)
+            ]);
+        } else {
+            return $this->error('Data gagal ditemukan');
+        }
+    }
+
+    public function partnerhistorybystatus($id, $status)
+    {
+        $transaction = Transaction::with(['customer'])->where('transactionStore', $id)->where('transactionStatus', $status)->orderBy("transactionId", "desc")->get();
+
+        foreach ($transaction as $transaksi) {
+            $details = $transaksi->details;
+            foreach ($details as $detail) {
+                $detail->product->store;
+            }
+        }
+
+        if (count($transaction) == 0) {
+            return response()->json([
+                'success' => 1,
+                'message' => 'Data berhasil ditemukan',
+                'istheretransaction' => false,
+                'transaksis' => collect($transaction)
+            ]);
+        } else if (count($transaction) > 0) {
+            return response()->json([
+                'success' => 1,
+                'message' => 'Data berhasil ditemukan',
+                'istheretransaction' => true,
+                'transaksis' => collect($transaction)
+            ]);
+        } else {
+            return $this->error('Data gagal ditemukan');
+        }
+    }
+
+    public function partnerchangestatus($id)
+    {
+        $transaksi = Transaction::where('transactionId', $id)->first();
+        if ($transaksi) {
+
+            $data = [
+                'transactionStatus' => 'DIKIRIM'
+            ];
+
+            $model = new Transaction();
+            $model->updateData($id, $data);
+
+            return response()->json([
+                'success' => 1,
+                'message' => 'Data berhasil ditemukan',
+                'transaksi' => $transaksi
+            ]);
+        } else {
+            return $this->error('Data gagal ditemukan');
+        }
+    }
+
+    // public function partnerresi()
+    // {
+    //     $resi = now()->format('Ymd') . rand(100, 999);
+
+    //     if ($resi) {
+    //         return response()->json([
+    //             'success' => 1,
+    //             'message' => 'Data berhasil ditemukan',
+    //             'resi' => $resi
+    //         ]);
+    //     } else {
+    //         return $this->error('Data gagal ditemukan');
+    //     }
+    // }
+
+
     public function error($pesan)
     {
         return response()->json([

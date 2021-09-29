@@ -14,4 +14,11 @@ class Store extends Model
     {
         return DB::table('stores')->get();
     }
+
+    public function storeproduct($id)
+    {
+        return DB::table('stores')
+            ->where('storeId', '=', $id)
+            ->get();
+    }
 }

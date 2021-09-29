@@ -22,4 +22,14 @@ class StoreController extends Controller
             'store' => $data
         ]);
     }
+
+    public function storeproduct($id)
+    {
+        $data =  $this->store->storeproduct($id);
+        return response()->json([
+            'success' => 1,
+            'message' => 'Data berhasil ditemukan',
+            'store' => $data
+        ]);
+    }
 }

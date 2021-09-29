@@ -11,6 +11,7 @@ use App\Http\Controllers\StoreController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\FeatureController;
+use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\TestimonialCourseController;
 use Illuminate\Support\Facades\Auth;

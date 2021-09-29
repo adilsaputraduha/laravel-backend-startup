@@ -22,4 +22,14 @@ class ProductCategoryController extends Controller
             'productcategory' => $data
         ]);
     }
+
+    public function categoryproduct($id)
+    {
+        $data =  $this->productCategory->categoryProduct($id);
+        return response()->json([
+            'success' => 1,
+            'message' => 'Data berhasil ditemukan',
+            'productcategory' => $data
+        ]);
+    }
 }

@@ -14,4 +14,11 @@ class Review extends Model
         'reviewDate', 'reviewProduct',
         'reviewUser', 'reviewStar', 'reviewMessage'
     ];
+
+    public function list()
+    {
+        return DB::table('reviews')
+            ->groupBy('reviewUser')
+            ->get();
+    }
 }
