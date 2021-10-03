@@ -110,6 +110,36 @@ class TransactionController extends Controller
         }
     }
 
+    public function historytransaksidetail($id)
+    {
+        $transaction = Transaction::with(['customer'])->where('transactionId', $id)->orderBy("transactionId", "desc")->get();
+
+        foreach ($transaction as $transaksi) {
+            $details = $transaksi->details;
+            foreach ($details as $detail) {
+                $detail->product->store;
+            }
+        }
+
+        if (count($transaction) == 0) {
+            return response()->json([
+                'success' => 1,
+                'message' => 'Data berhasil ditemukan',
+                'istheretransaction' => false,
+                'transaksidetail' => collect($transaction)
+            ]);
+        } else if (count($transaction) > 0) {
+            return response()->json([
+                'success' => 1,
+                'message' => 'Data berhasil ditemukan',
+                'istheretransaction' => true,
+                'transaksidetail' => collect($transaction)
+            ]);
+        } else {
+            return $this->error('Data gagal ditemukan');
+        }
+    }
+
     public function historybystatus($id, $status)
     {
         $transaction = Transaction::with(['customer'])->where('transactionUserId', $id)->where('transactionStatus', $status)->orderBy("transactionId", "desc")->get();
@@ -248,6 +278,28 @@ class TransactionController extends Controller
 
             $data = [
                 'transactionStatus' => 'DIKIRIM'
+            ];
+
+            $model = new Transaction();
+            $model->updateData($id, $data);
+
+            return response()->json([
+                'success' => 1,
+                'message' => 'Data berhasil ditemukan',
+                'transaksi' => $transaksi
+            ]);
+        } else {
+            return $this->error('Data gagal ditemukan');
+        }
+    }
+
+    public function partnerchangedelivery($id, $delivery)
+    {
+        $transaksi = Transaction::where('transactionId', $id)->first();
+        if ($transaksi) {
+
+            $data = [
+                'transactionDeliveryDetail' => $delivery
             ];
 
             $model = new Transaction();

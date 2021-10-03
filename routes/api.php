@@ -42,6 +42,7 @@ Route::get('/productrating/{rating}/{id}', [ProductController::class, 'updaterat
 Route::get('/product-latest', [ProductController::class, 'latest']);
 Route::post('/checkout', [TransactionController::class, 'save']);
 Route::get('/checkout/{id}', [TransactionController::class, 'history']);
+Route::get('/checkout-detail/{id}', [TransactionController::class, 'historytransaksidetail']);
 Route::get('/checkout/{id}/{status}', [TransactionController::class, 'historybystatus']);
 Route::post('/cancel/{id}', [TransactionController::class, 'cancel']);
 Route::post('/upload', [TransactionController::class, 'uploadbukti']);
@@ -50,4 +51,6 @@ Route::get('/partner-history/{id}', [TransactionController::class, 'partnerhisto
 Route::get('/partner-history/{id}/{status}', [TransactionController::class, 'partnerhistorybystatus']);
 Route::get('/partner-product/{id}', [ProductController::class, 'partnerlist']);
 Route::post('/partner-status/{id}', [TransactionController::class, 'partnerchangestatus']);
+Route::post('/partner-delivery/{id}/{delivery}', [TransactionController::class, 'partnerchangedelivery']);
 // Route::get('/partner-resi', [TransactionController::class, 'partnerresi']);
+Route::post('/partner-login', [StoreController::class, 'partnerlogin']);

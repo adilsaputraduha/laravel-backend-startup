@@ -78,7 +78,7 @@ class ProductController extends Controller
         return response()->json([
             'success' => 1,
             'message' => 'Data berhasil ditemukan',
-            'product' =>  collect($products)
+            'produk' =>  collect($products)
         ]);
     }
 

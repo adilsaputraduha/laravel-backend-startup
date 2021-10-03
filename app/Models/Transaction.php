@@ -16,7 +16,7 @@ class Transaction extends Model
         'transactionStatus', 'transactionReceipt', 'transactionCourier', 'transactionCostShipping',
         'transactionTotalTransfer', 'transactionBank', 'transactionName',
         'transactionPhone', 'transactionMethod', 'transactionLocationDetail', 'transactionMethod',
-        'transactionDescription', 'transactionExpiredAt', 'transactionCreatedAt', 'transactionStore'
+        'transactionDescription', 'transactionExpiredAt', 'transactionCreatedAt', 'transactionStore', 'transactionDeliveryDetail'
     ];
 
     public function details()

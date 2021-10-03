@@ -10,6 +10,11 @@ class Store extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'storeName', 'storeEmail', 'storePhoneNumber', 'storeStreet', 'storeDistrict',
+        'storeCity', 'storeProvince', 'storeZipCode', 'storePassword', 'storeJoin'
+    ];
+
     public function list()
     {
         return DB::table('stores')->get();
