@@ -87,7 +87,7 @@ class TransactionController extends Controller
         foreach ($transaction as $transaksi) {
             $details = $transaksi->details;
             foreach ($details as $detail) {
-                $detail->product->store;
+                $detail->product;
             }
         }
 
@@ -126,14 +126,14 @@ class TransactionController extends Controller
                 'success' => 1,
                 'message' => 'Data berhasil ditemukan',
                 'istheretransaction' => false,
-                'transaksidetail' => collect($transaction)
+                'transaksis' => collect($transaction)
             ]);
         } else if (count($transaction) > 0) {
             return response()->json([
                 'success' => 1,
                 'message' => 'Data berhasil ditemukan',
                 'istheretransaction' => true,
-                'transaksidetail' => collect($transaction)
+                'transaksis' => collect($transaction)
             ]);
         } else {
             return $this->error('Data gagal ditemukan');

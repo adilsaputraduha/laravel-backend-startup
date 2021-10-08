@@ -25,10 +25,10 @@ class TransactionDetail extends Model
         return $this->belongsTo(Product::class, "detailProductId", "productId");
     }
 
-    public function store()
-    {
-        return $this->belongsTo(Store::class, "detailProductId", "storeId");
-    }
+    // public function store()
+    // {
+    //     return $this->belongsTo(Store::class, "detailProductId", "storeId");
+    // }
 
     public function list($id)
     {

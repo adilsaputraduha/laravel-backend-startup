@@ -41,8 +41,8 @@ class CustomerController extends Controller
         $validasi = Validator::make($request->all(), [
             'customerName' => 'required',
             'customerEmail' => 'required|unique:customers',
-            'customerPhoneNumber' => 'required',
-            'customerPassword' => 'required|min:6',
+            'customerPhoneNumber' => 'required|unique:customers',
+            'customerPassword' => 'required|min:6'
         ]);
         // Jika validasi tidak terpenuhi
         if ($validasi->fails()) {
@@ -67,6 +67,32 @@ class CustomerController extends Controller
             ]);
         } else {
             return $this->error('Registrasi gagal');
+        }
+    }
+
+    public function updateprofile(Request $request)
+    {
+        $customer = Customer::where('customerId', $request->customerId)->first();
+
+        if ($customer) {
+
+            $data = [
+                'customerName' => $request->customerName,
+                'customerEmail' => $request->customerEmail,
+                'customerPhoneNumber' => $request->customerPhoneNumber
+            ];
+
+            $this->customer->updateData($request->customerId, $data);
+
+            $customerupdate = Customer::where('customerId', $request->customerId)->first();
+
+            return response()->json([
+                'success' => 1,
+                'message' => 'Data berhasil ditemukan',
+                'transaksi' => $customerupdate
+            ]);
+        } else {
+            return $this->error('Data gagal ditemukan');
         }
     }
 

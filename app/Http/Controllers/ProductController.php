@@ -6,6 +6,7 @@ use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\Store;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
@@ -50,7 +51,7 @@ class ProductController extends Controller
             if ($request->image->getClientOriginalName()) {
                 $file = str_replace(' ', '_', $request->image->getClientOriginalName());
                 $fileName =  date('mYdHs') . rand(1, 999) . '_' . $file;
-                $request->image->storeAs('public/images/products', $fileName);
+                Storage::disk('public')->put($fileName, file_get_contents($request->image));
             }
 
             $data = [

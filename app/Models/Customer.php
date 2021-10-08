@@ -26,4 +26,11 @@ class Customer extends Model
         return DB::table('customers')
             ->get();
     }
+
+    public function updateData($id, $data)
+    {
+        return DB::table('customers')
+            ->where('customerId', '=', $id)
+            ->update($data);
+    }
 }

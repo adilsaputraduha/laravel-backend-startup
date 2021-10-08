@@ -27,6 +27,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/login', [UserController::class, 'login']);
 Route::post('/logincustomer', [CustomerController::class, 'logincustomer']);
+Route::post('/update-profile', [CustomerController::class, 'updateprofile']);
 Route::post('/register', [UserController::class, 'register']);
 Route::post('/registercustomer', [CustomerController::class, 'registercustomer']);
 Route::get('/store', [StoreController::class, 'list']);
@@ -35,7 +36,9 @@ Route::get('/product-category', [ProductCategoryController::class, 'list']);
 Route::get('/category-product/{id}', [ProductCategoryController::class, 'categoryproduct']);
 Route::get('/courier', [CourierController::class, 'list']);
 Route::get('/product', [ProductController::class, 'list']);
+Route::get('/product-filter/{id}', [ProductController::class, 'listfilter']);
 Route::get('/product/{id}', [ProductController::class, 'listdetail']);
+Route::get('/product-search/{nama}', [ProductController::class, 'listsearch']);
 Route::get('/productbycategory/{id}', [ProductController::class, 'listbycategory']);
 Route::get('/productlimit', [ProductController::class, 'listlimit']);
 Route::get('/productrating/{rating}/{id}', [ProductController::class, 'updaterating']);

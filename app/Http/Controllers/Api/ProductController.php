@@ -27,6 +27,110 @@ class ProductController extends Controller
         ]);
     }
 
+    public function listfilter($id)
+    {
+        if ($id == 1) {
+            $products = Product::with(['category', 'store'])->where('productRating', '>=', 4)->get();
+
+            foreach ($products as $product) {
+                $product->reviews;
+            }
+
+            if (count($products) == 0) {
+                return response()->json([
+                    'success' => 1,
+                    'message' => 'Data berhasil ditemukan',
+                    'isthereproduct' => false,
+                    'product' =>  collect($products)
+                ]);
+            } else if (count($products) > 0) {
+                return response()->json([
+                    'success' => 1,
+                    'message' => 'Data berhasil ditemukan',
+                    'isthereproduct' => true,
+                    'product' =>  collect($products)
+                ]);
+            } else {
+                return $this->error('Data gagal ditemukan');
+            }
+        } else if ($id == 2) {
+            $products = Product::with(['category', 'store'])->orderby('productPrice', 'ASC')->get();
+
+            foreach ($products as $product) {
+                $product->reviews;
+            }
+
+            if (count($products) == 0) {
+                return response()->json([
+                    'success' => 1,
+                    'message' => 'Data berhasil ditemukan',
+                    'isthereproduct' => false,
+                    'product' =>  collect($products)
+                ]);
+            } else if (count($products) > 0) {
+                return response()->json([
+                    'success' => 1,
+                    'message' => 'Data berhasil ditemukan',
+                    'isthereproduct' => true,
+                    'product' =>  collect($products)
+                ]);
+            } else {
+                return $this->error('Data gagal ditemukan');
+            }
+        } else {
+            $products = Product::with(['category', 'store'])->where('productRating', '>=', 4)->orderby('productPrice', 'ASC')->get();
+
+            foreach ($products as $product) {
+                $product->reviews;
+            }
+
+            if (count($products) == 0) {
+                return response()->json([
+                    'success' => 1,
+                    'message' => 'Data berhasil ditemukan',
+                    'isthereproduct' => false,
+                    'product' =>  collect($products)
+                ]);
+            } else if (count($products) > 0) {
+                return response()->json([
+                    'success' => 1,
+                    'message' => 'Data berhasil ditemukan',
+                    'isthereproduct' => true,
+                    'product' =>  collect($products)
+                ]);
+            } else {
+                return $this->error('Data gagal ditemukan');
+            }
+        }
+    }
+
+    public function listsearch($nama)
+    {
+        $products = Product::with(['category', 'store'])->where('productName', 'LIKE', '%' . $nama . '%')->get();
+
+        foreach ($products as $product) {
+            $product->reviews;
+        }
+
+        if (count($products) == 0) {
+            return response()->json([
+                'success' => 1,
+                'message' => 'Data berhasil ditemukan',
+                'isthereproduct' => false,
+                'product' =>  collect($products)
+            ]);
+        } else if (count($products) > 0) {
+            return response()->json([
+                'success' => 1,
+                'message' => 'Data berhasil ditemukan',
+                'isthereproduct' => true,
+                'product' =>  collect($products)
+            ]);
+        } else {
+            return $this->error('Data gagal ditemukan');
+        }
+    }
+
     public function listlimit()
     {
         $products = Product::with(['category', 'store'])->limit(5)->get();
