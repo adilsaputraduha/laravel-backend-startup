@@ -8,6 +8,7 @@ use App\Models\TransactionDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class TransactionController extends Controller
 {
@@ -197,7 +198,7 @@ class TransactionController extends Controller
         if ($request->image->getClientOriginalName()) {
             $file = str_replace(' ', '_', $request->image->getClientOriginalName());
             $fileName =  date('mYdHs') . rand(1, 999) . '_' . $file;
-            $request->image->storeAs('public/images/transfer', $fileName);
+            Storage::disk('public')->put($fileName, file_get_contents($request->image));
         } else {
             return $this->error('Ada kesalahan');
         }

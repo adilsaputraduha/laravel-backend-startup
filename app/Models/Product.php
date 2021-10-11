@@ -14,7 +14,7 @@ class Product extends Model
         'productName', 'productDescription',
         'productStore', 'productCategory', 'productPrice', 'productStock',
         'productRating', 'productSold', 'productImage',
-        'productStatus', 'productWeight', 'productLength', 'productWide', 'productHigh', 'productPromo'
+        'productStatus', 'productWeight', 'productLength', 'productWide', 'productHigh', 'productPromo', 'productSatuan'
     ];
 
     public function store()

@@ -50,7 +50,7 @@ Route::get('/checkout-detail/{id}', [TransactionController::class, 'historytrans
 Route::get('/checkout/{id}/{status}', [TransactionController::class, 'historybystatus']);
 Route::post('/cancel/{id}', [TransactionController::class, 'cancel']);
 Route::post('/upload', [TransactionController::class, 'uploadbukti']);
-
+Route::post('/product/save', [ProductController::class, 'save']);
 // Api Partner
 Route::get('/partner-history/{id}', [TransactionController::class, 'partnerhistory']);
 Route::get('/partner-history/{id}/{status}', [TransactionController::class, 'partnerhistorybystatus']);
