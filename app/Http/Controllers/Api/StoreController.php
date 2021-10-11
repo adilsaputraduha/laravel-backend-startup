@@ -33,6 +33,16 @@ class StoreController extends Controller
         ]);
     }
 
+    public function storetotal($id)
+    {
+        $data =  $this->store->storetotal($id);
+        return response()->json([
+            'success' => 1,
+            'message' => 'Data berhasil ditemukan',
+            'totalproductstore' => $data
+        ]);
+    }
+
     // Partner
 
     public function partnerlogin(Request $request)

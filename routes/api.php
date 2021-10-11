@@ -31,6 +31,7 @@ Route::post('/update-profile', [CustomerController::class, 'updateprofile']);
 Route::post('/register', [UserController::class, 'register']);
 Route::post('/registercustomer', [CustomerController::class, 'registercustomer']);
 Route::get('/store', [StoreController::class, 'list']);
+Route::get('/store-total/{id}', [StoreController::class, 'storetotal']);
 Route::get('/store-product/{id}', [StoreController::class, 'storeproduct']);
 Route::get('/product-category', [ProductCategoryController::class, 'list']);
 Route::get('/category-product/{id}', [ProductCategoryController::class, 'categoryproduct']);
@@ -49,6 +50,7 @@ Route::get('/checkout-detail/{id}', [TransactionController::class, 'historytrans
 Route::get('/checkout/{id}/{status}', [TransactionController::class, 'historybystatus']);
 Route::post('/cancel/{id}', [TransactionController::class, 'cancel']);
 Route::post('/upload', [TransactionController::class, 'uploadbukti']);
+
 // Api Partner
 Route::get('/partner-history/{id}', [TransactionController::class, 'partnerhistory']);
 Route::get('/partner-history/{id}/{status}', [TransactionController::class, 'partnerhistorybystatus']);

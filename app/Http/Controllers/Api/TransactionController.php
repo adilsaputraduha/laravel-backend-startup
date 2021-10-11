@@ -23,6 +23,7 @@ class TransactionController extends Controller
             'transactionUserId' => 'required',
             'transactionTotalItem' => 'required',
             'transactionTotalPrice' => 'required',
+            'transactionStatus' => 'required',
             'transactionCostShipping' => 'required',
             'transactionTotalTransfer' => 'required',
             'transactionName' => 'required',
@@ -38,7 +39,6 @@ class TransactionController extends Controller
         $paymentCode = "INV-PYM-" . now()->format('Ymd') . "-" . rand(100, 999);
         $transactionCode = "INV-PYM-" . now()->format('Ymd') . "-" . rand(100, 999);
         $uniqueCode = rand(100, 999);
-        $status = "DIPROSES";
         $expiredAt = now()->addDay();
         $createdAt = now();
 
@@ -46,7 +46,6 @@ class TransactionController extends Controller
             'transactionPaymentCode' => $paymentCode,
             'transactionCode' => $transactionCode,
             'transactionUniqueCode' => $uniqueCode,
-            'transactionStatus' => $status,
             'transactionExpiredAt' => $expiredAt,
             'transactionCreatedAt' => $createdAt
         ]);
@@ -87,7 +86,7 @@ class TransactionController extends Controller
         foreach ($transaction as $transaksi) {
             $details = $transaksi->details;
             foreach ($details as $detail) {
-                $detail->product;
+                $detail->product->store;
             }
         }
 

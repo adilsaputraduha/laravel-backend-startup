@@ -26,4 +26,12 @@ class Store extends Model
             ->where('storeId', '=', $id)
             ->get();
     }
+
+    public function storetotal($id)
+    {
+        return DB::table('products')
+            ->select(DB::raw("COUNT(productId) as jumlah"))
+            ->where('productStore', '=', $id)
+            ->get();
+    }
 }
