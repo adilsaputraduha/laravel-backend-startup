@@ -21,6 +21,21 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
+                        @if (session('success-message'))
+                        <div class="alert alert-green alert-dismissible fade show" role="alert">
+                            {{ session('success-message') }}
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"
+                                aria-label="Close">
+                            </button>
+                        </div>
+                        @elseif (session('failed-message'))
+                            <div class="alert alert-red alert-dismissible fade show" role="alert">
+                                {{ session('failed-message') }} : {{ $errors->content->first() }}
+                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"
+                                    aria-label="Close">
+                                </button>
+                            </div>
+                        @endif
                         <button type="button" class="btn btn-green mb-3" data-bs-toggle="modal" data-bs-target="#addModal">Add new</button>
                         <table id="datatable" class="table table-centered dt-responsive table-nowrap mb-0" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                             <thead>
@@ -52,10 +67,10 @@
                                                 <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
                                             </svg>
                                         </a>
-                                        <a class="btn btn-green btn-sm mb-1" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $data->storeId }}">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
-                                                <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
-                                                <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
+                                        <a class="btn btn-green btn-sm mb-1" data-bs-toggle="modal" data-bs-target="#resetModal{{ $data->storeId }}">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-counterclockwise" viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z"/>
+                                                <path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z"/>
                                             </svg>
                                         </a>
                                     </td>
@@ -70,7 +85,7 @@
     </div>
 </div>
 <!-- Modal -->
-<form action="{{ route('store') }}" method="POST">
+<form action="{{ route('storesave') }}" method="POST">
     @csrf
     <div class="modal" tabindex="-1" id="addModal">
         <div class="modal-dialog modal-lg">
@@ -147,106 +162,130 @@
     </div>
 </form>
 @foreach ($store as $data)
-<form action="/product-category/update" method="POST">
-    @method('PUT')
-    @csrf
-    <div class="modal" tabindex="-1" id="editModal{{ $data->storeId }}">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Update store</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="mb-3">
-                                <label class="form-label">Name</label>
-                                <input type="text" class="form-control" autocomplete="off" name="name" placeholder="Type new name ..." value="{{ $data->storeName }}" required />
+    <form action="{{ route('storeupdate') }}" method="POST">
+        @method('PUT')
+        @csrf
+        <div class="modal" tabindex="-1" id="editModal{{ $data->storeId }}">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Update store</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="mb-3">
+                                    <input type="hidden" value="{{ $data->storeId }}" name="id" required />
+                                    <label class="form-label">Name</label>
+                                    <input type="text" class="form-control" autocomplete="off" name="name" placeholder="Type new name ..." value="{{ $data->storeName }}" required />
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Email</label>
+                                    <input type="email" class="form-control" readonly autocomplete="off" name="email" placeholder="Type new email ..." value="{{ $data->storeEmail }}" required />
+                                </div>
                             </div>
                         </div>
-                        <div class="col-sm-6">
-                            <div class="mb-3">
-                                <label class="form-label">Email</label>
-                                <input type="email" class="form-control" autocomplete="off" name="email" placeholder="Type new email ..." value="{{ $data->storeEmail }}" required />
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Phone Number</label>
+                                    <input type="text" class="form-control" autocomplete="off" name="phonenumber" placeholder="Type new phone number ..." value="{{ $data->storePhoneNumber }}" required />
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Zip Code</label>
+                                    <input type="text" class="form-control" autocomplete="off" name="zipcode" placeholder="Type new zip code ..." value="{{ $data->storeZipCode }}" required />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="mb-3">
+                                    <label class="form-label">Street</label>
+                                    <textarea class="form-control" placeholder="Type new street ..." name="street" style="height: 100px">{{ $data->storeStreet }}</textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="mb-3">
+                                    <label class="form-label">District</label>
+                                    <input type="text" class="form-control" autocomplete="off" name="district" placeholder="Type new district ..." value="{{ $data->storeDistrict }}" required />
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="mb-3">
+                                    <label class="form-label">City</label>
+                                    <input type="text" class="form-control" autocomplete="off" name="city" placeholder="Type new city ..." value="{{ $data->storeCity }}" required />
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="mb-3">
+                                    <label class="form-label">Province</label>
+                                    <input type="text" class="form-control" autocomplete="off" name="province" placeholder="Type new province ..." value="{{ $data->storeProvince }}" required />
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="mb-3">
-                                <label class="form-label">Phone Number</label>
-                                <input type="text" class="form-control" autocomplete="off" name="phonenumber" placeholder="Type new phone number ..." value="{{ $data->storePhoneNumber }}" required />
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="mb-3">
-                                <label class="form-label">Zip Code</label>
-                                <input type="text" class="form-control" autocomplete="off" name="zipcode" placeholder="Type new zip code ..." value="{{ $data->storeZipCode }}" required />
-                            </div>
-                        </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-green">Update</button>
                     </div>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="mb-3">
-                                <label class="form-label">Street</label>
-                                <textarea class="form-control" placeholder="Type new street ..." name="street" style="height: 100px">{{ $data->storeStreet }}</textarea>
-                            </div>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <div class="mb-3">
-                                <label class="form-label">District</label>
-                                <input type="text" class="form-control" autocomplete="off" name="district" placeholder="Type new district ..." value="{{ $data->storeDistrict }}" required />
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="mb-3">
-                                <label class="form-label">City</label>
-                                <input type="text" class="form-control" autocomplete="off" name="city" placeholder="Type new city ..." value="{{ $data->storeCity }}" required />
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="mb-3">
-                                <label class="form-label">Province</label>
-                                <input type="text" class="form-control" autocomplete="off" name="province" placeholder="Type new province ..." value="{{ $data->storeProvince }}" required />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-green">Update</button>
                 </div>
             </div>
         </div>
-    </div>
-</form>
-<form action="/product-category/delete" method="POST">
-    @method('DELETE')
-    @csrf
-    <div class="modal" tabindex="-1" id="deleteModal{{ $data->storeId }}">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Delete store</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <input type="hidden" name="id" required value="{{ $data->storeId }}" />
-                    <h6>Are you sure you delete this data?</h6>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-                    <button type="submit" class="btn btn-green">Yes</button>
+    </form>
+    <form action="{{ route('storedelete') }}" method="POST">
+        @method('DELETE')
+        @csrf
+        <div class="modal" tabindex="-1" id="deleteModal{{ $data->storeId }}">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Delete store</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" name="id" required value="{{ $data->storeId }}" />
+                        <h6>Are you sure you delete this data?</h6>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                        <button type="submit" class="btn btn-green">Yes</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</form>
+    </form>
+    <form action="{{ route('storereset') }}" method="POST">
+        @method('PUT')
+        @csrf
+        <div class="modal" tabindex="-1" id="resetModal{{ $data->storeId }}">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Reset password store</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" name="id" required value="{{ $data->storeId }}" />
+                        <h6>Are you sure you reset password this data?</h6>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                        <button type="submit" class="btn btn-green">Yes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
 @endforeach
+
 @endsection
 
 @section('script')

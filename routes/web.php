@@ -49,6 +49,10 @@ Route::put('/role/update', [RoleController::class, 'update'])->name('updaterole'
 Route::delete('/role/delete', [RoleController::class, 'delete'])->name('deleterole');
 // Store
 Route::get('/store', [StoreController::class, 'index'])->name('store');
+Route::post('/store/save', [StoreController::class, 'save'])->name('storesave');
+Route::put('/store/update', [StoreController::class, 'update'])->name('storeupdate');
+Route::delete('/store/delete', [StoreController::class, 'delete'])->name('storedelete');
+Route::put('/store/reset', [StoreController::class, 'reset'])->name('storereset');
 // Product
 Route::get('/product', [ProductController::class, 'index'])->name('product');
 Route::post('/product/save', [ProductController::class, 'save'])->name('productsave');

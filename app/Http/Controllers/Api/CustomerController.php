@@ -55,7 +55,7 @@ class CustomerController extends Controller
             'customerEmail' => $request->customerEmail,
             'customerPhoneNumber' => $request->customerPhoneNumber,
             'customerPassword' => bcrypt($request->customerPassword),
-            'customerImage' => 'default.png'
+            'customerImage' => 'user.png'
         ];
         $this->customer->saveData($data);
         // Jika data berhasil disimpan

@@ -34,4 +34,30 @@ class Store extends Model
             ->where('productStore', '=', $id)
             ->get();
     }
+
+    public function saveData($data)
+    {
+        DB::table('stores')->insert($data);
+    }
+
+    public function updateData($id, $data)
+    {
+        DB::table('stores')
+            ->where('storeId', '=', $id)
+            ->update($data);
+    }
+
+    public function deleteData($id)
+    {
+        DB::table('stores')
+            ->where('storeId', '=', $id)
+            ->delete();
+    }
+
+    public function resetData($id, $data)
+    {
+        DB::table('stores')
+            ->where('storeId', '=', $id)
+            ->update($data);
+    }
 }

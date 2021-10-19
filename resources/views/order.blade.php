@@ -66,6 +66,8 @@
                                                         <span class="badge bg-warning">DIPROSES</span>
                                                     @elseif ($data->transactionStatus == "DIKIRIM")
                                                         <span class="badge bg-primary">DIKIRIM</span>
+                                                    @elseif ($data->transactionStatus == "BELUM BAYAR")
+                                                        <span class="badge bg-secondary">BELUM BAYAR</span>
                                                     @elseif ($data->transactionStatus == "BATAL")
                                                         <span class="badge bg-danger">BATAL</span>
                                                     @elseif ($data->transactionStatus == "SELESAI")
