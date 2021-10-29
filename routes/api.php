@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\StoreController;
 use App\Http\Controllers\Api\ProductCategoryController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\TransactionController;
+use App\Http\Controllers\Api\KotaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -51,6 +52,7 @@ Route::get('/checkout/{id}/{status}', [TransactionController::class, 'historybys
 Route::post('/cancel/{id}', [TransactionController::class, 'cancel']);
 Route::post('/upload', [TransactionController::class, 'uploadbukti']);
 Route::post('/product/save', [ProductController::class, 'save']);
+Route::get('/kota', [KotaController::class, 'list']);
 // Api Partner
 Route::get('/partner-history/{id}', [TransactionController::class, 'partnerhistory']);
 Route::get('/partner-history/{id}/{status}', [TransactionController::class, 'partnerhistorybystatus']);
@@ -59,3 +61,4 @@ Route::post('/partner-status/{id}', [TransactionController::class, 'partnerchang
 Route::post('/partner-delivery/{id}/{delivery}', [TransactionController::class, 'partnerchangedelivery']);
 // Route::get('/partner-resi', [TransactionController::class, 'partnerresi']);
 Route::post('/partner-login', [StoreController::class, 'partnerlogin']);
+Route::post('/partner-reject/{id}/{reason}', [TransactionController::class, 'partnerreject']);

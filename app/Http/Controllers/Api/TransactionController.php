@@ -315,6 +315,28 @@ class TransactionController extends Controller
         }
     }
 
+    public function partnerreject($id, $reason)
+    {
+        $transaksi = Transaction::where('transactionId', $id)->first();
+        if ($transaksi) {
+
+            $data = [
+                'transactionDeliveryDetail' => $reason
+            ];
+
+            $model = new Transaction();
+            $model->updateData($id, $data);
+
+            return response()->json([
+                'success' => 1,
+                'message' => 'Data berhasil ditemukan',
+                'transaksi' => $transaksi
+            ]);
+        } else {
+            return $this->error('Data gagal ditemukan');
+        }
+    }
+
     // public function partnerresi()
     // {
     //     $resi = now()->format('Ymd') . rand(100, 999);
