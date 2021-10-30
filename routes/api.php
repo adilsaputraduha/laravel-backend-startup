@@ -52,6 +52,7 @@ Route::get('/checkout/{id}/{status}', [TransactionController::class, 'historybys
 Route::post('/cancel/{id}', [TransactionController::class, 'cancel']);
 Route::post('/upload', [TransactionController::class, 'uploadbukti']);
 Route::post('/product/save', [ProductController::class, 'save']);
+Route::post('/product/saveimage', [ProductController::class, 'saveimage']);
 Route::get('/kota', [KotaController::class, 'list']);
 // Api Partner
 Route::get('/partner-history/{id}', [TransactionController::class, 'partnerhistory']);

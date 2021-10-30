@@ -235,15 +235,6 @@ class ProductController extends Controller
             return $this->error($val[0]);
         }
 
-        $file = '';
-        if ($request->productImage->getClientOriginalName()) {
-            $file = str_replace(' ', '_', $request->productImage->getClientOriginalName());
-            $fileName =  date('mYdHs') . rand(1, 999) . '_' . $file;
-            Storage::disk('public')->put($fileName, file_get_contents($request->productImage));
-        } else {
-            return $this->error('Ada kesalahan');
-        }
-
         $dataProduct = [
             'productName' => Request()->productName,
             'productDescription' => Request()->productDescription,
@@ -259,7 +250,7 @@ class ProductController extends Controller
             'productStatus' => 1,
             'productRating' => "5",
             'productSold' => "0",
-            'productImage' => $fileName
+            'productImage' => "default_product.png"
         ];
 
         $product = Product::create($dataProduct);
@@ -274,6 +265,36 @@ class ProductController extends Controller
             return $this->error('Data gagal disimpan');
         }
     }
+
+    public function saveimage(Request $request)
+    {
+        $file = '';
+        if ($request->productImage->getClientOriginalName()) {
+            $file = str_replace(' ', '_', $request->productImage->getClientOriginalName());
+            $fileName =  date('mYdHs') . rand(1, 999) . '_' . $file;
+            Storage::disk('public')->put($fileName, file_get_contents($request->productImage));
+        } else {
+            return $this->error('Ada kesalahan');
+        }
+
+        $id = $request->productId;
+        $dataProduct = [
+            'productImage' => $fileName
+        ];
+
+        $product = $this->product->updateImage($id, $dataProduct);
+
+        if (!empty($product)) {
+            return response()->json([
+                'success' => 1,
+                'message' => 'Data gambar berhasil disimpan',
+                'product' => collect($product)
+            ]);
+        } else {
+            return $this->error('Data gagal disimpan');
+        }
+    }
+
     // Partner
 
     public function partnerlist($id)

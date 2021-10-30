@@ -6,7 +6,7 @@
     <title>ORGANIKITA : Site Administrator</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Logo -->
-    <link rel="shortcut icon" href="{{ asset('assets') }}/images/logoo.png">
+    <link rel="shortcut icon" href="{{ asset('assets') }}/images/logolightno.png">
     <!-- Bootstrap Css -->
     <link href="{{ asset('assets') }}/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
     <!-- Icons Css -->
@@ -157,7 +157,7 @@
             <div class="navbar-brand-box">
                 <a href="index.html" class="logo logo-dark">
                     <span class="logo-sm">
-                        <img src="{{ asset('assets') }}/images/logoo.png" alt="" height="22">
+                        <img src="{{ asset('assets') }}/images/logolightno.png" alt="" height="22">
                     </span>
                     <span class="logo-lg" style="margin-left: 40px;">
                         <img src="{{ asset('assets') }}/images/logogreenpanjang.png" alt="" height="22">

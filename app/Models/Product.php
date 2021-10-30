@@ -70,6 +70,13 @@ class Product extends Model
             ->update($data);
     }
 
+    public function updateImage($id, $image)
+    {
+        return DB::table('products')
+            ->where('productId', '=', $id)
+            ->update($image);
+    }
+
     public function updateStock($dataone, $productId)
     {
         DB::table('products')
